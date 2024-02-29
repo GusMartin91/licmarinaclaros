@@ -26,31 +26,30 @@
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient navbar-fixed-top ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="./index.php"><img src="./assets/img/vegetables.png" alt="vegetables food healthy fruit nutrition"></a>
-                <a class="navbar-brand fs-5" href="./index.php"> Lic. en Nutricion
-                    <br><strong>Marina Claros</strong></a>
+<header class="header">
+    <nav class="navbar navbar-expand-lg bg-gradient navbar-fixed-top ">
+        <div class="container-fluid justify-content-center">
+            <div class="logo">
+                <a href="./index.php"><img style="max-height: 150px;" src="./assets/img/logo_nutricion.jpeg" alt="vegetables food healthy fruit nutrition"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto ">
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link mx-1 active" style="cursor:pointer" onclick="openNewWindow('../calendario/index.php', 'Calendario')"><i class="fa-regular fa-calendar fa-lg"></i> Solicitar Turno |</a>
+                            <a class="nav-link mx-1 active" style="cursor:pointer"> Agendar Turno |</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-1 active position-relative" style="cursor:pointer" onclick="openNewWindow('../mensajeria/index.php', 'Mensajeria')">
-                                <i class="fa-regular fa-comments fa-lg"></i> Mensajería
-                                <span class="position-absolute top-5 start-90 translate-middle badge rounded-pill bg-danger" id="spanBadge"></span> |
+                            <a class="nav-link mx-1 active position-relative" style="cursor:pointer">
+                                Sobre mí |
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-1 active" href="./links/index.php"><i class="fa-solid fa-link fa-lg"></i> Links Utiles |</a>
+                            <a class="nav-link mx-1 active" href="./links/index.php"> Links Utiles |</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-1 active" href="./notas/index.php"><i class="fa-regular fa-book fa-lg"></i> Notas |</a>
+                            <a class="nav-link mx-1 active" href="./notas/index.php"> Notas |</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link mx-1 dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Aplicativos</a>
@@ -78,7 +77,8 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item disabled">
-                                        <?php // echo $_SESSION['dni']; ?>
+                                        <?php // echo $_SESSION['dni']; 
+                                        ?>
                                     </a></li>
                                 <li><a class="dropdown-item" href="./registro/servidor/login/logout.php">Salir del
                                         sistema</a></li>
