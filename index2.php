@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marina Claros Nutricionista</title>
-
+  <link rel="icon" href="assets/img/vegetables.png" type="image/png">
   <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/bootstrap-5.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/estilo_landing.css">
@@ -41,10 +41,11 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8" id="sobre_mi">
-      <h1>Bienvenido a la Consulta de Nutrición</h1>
-      <p>Estoy acá para ayudarte a transformar tu vida a través de la alimentación y el estilo de vida saludables.
-          ¿Estás listo para tomar el control de tu bienestar y descubrir el poder que la nutrición puede tener en tu vida? Permíteme guiarte en este viaje hacia una mejor salud y felicidad.
-          Creo firmemente que la nutrición es la base de un estilo de vida saludable y feliz. Con el enfoque adecuado en la alimentación equilibrada y sostenible, puedes lograr cambios significativos en tu energía, estado de ánimo y bienestar general.
+      <h2>Bienvenido a tu cambio de vida</h2>
+      <p>Hola soy Marina y estoy acá para ayudarte a transformar tu vida a través de la alimentación y el estilo de vida saludables.
+          ¿Estás listo para tomar el control de tu bienestar y descubrir el poder que la nutrición puede tener en tu vida? 
+          Quisiera guiarte en este viaje hacia una mejor salud y felicidad.
+          Con el enfoque adecuado en la alimentación equilibrada y sostenible, puedes lograr cambios significativos en tu energía, estado de ánimo y bienestar general.
           Mi objetivo es trabajar contigo para desarrollar un plan personalizado que se adapte a tus necesidades individuales, metas y estilo de vida. No se trata de dietas restrictivas o contar calorías, sino de aprender a tomar decisiones alimenticias saludables y sostenibles que te ayuden a sentirte mejor cada día.
           Ya sea que estés buscando perder peso, aumentar tu energía, mejorar tu rendimiento deportivo o simplemente adoptar hábitos alimenticios más saludables, estoy aquí para brindarte el apoyo y la orientación que necesitas para alcanzar tus objetivos.
           Juntos, podemos trabajar para crear un cambio positivo y duradero en tu vida. ¿Estás listo para comenzar este emocionante viaje hacia una versión más saludable y feliz de ti mismo? ¡Contáctame hoy mismo y demos el primer paso hacia una nueva y vibrante tú!</p>
