@@ -85,3 +85,8 @@
 #sobre_mi{
   text-align: justify;
 }
+.instagram-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
