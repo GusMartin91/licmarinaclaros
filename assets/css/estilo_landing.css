@@ -2,14 +2,6 @@
   margin: 0;
   padding: 0;
 }
-.cont {
-  margin: auto;
-  margin-top: 50px;
-}
-.cont img {
-  float: left;
-  margin:0 20px 5px 0;
-}
 .navbar-nav .nav-link {
   color: #000 !important;
 }
@@ -84,9 +76,4 @@
 }
 #sobre_mi{
   text-align: justify;
-}
-.instagram-post {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
