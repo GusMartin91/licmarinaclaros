@@ -1,20 +1,16 @@
 <?php require './assets/template/header.php' ?>
 <title>Lic. Marina Claros</title>
 <div class="container mt-5">
-  <div class="row mb-3">
+  <div class="row mb-4">
     <div class="col-md-8" id="sobre_mi">
-      <h2>Bienvenido a tu cambio de vida</h2>
-      <p>Hola soy Marina y estoy acá para ayudarte a transformar tu vida a través de la alimentación y el estilo de vida saludables.
-        ¿Estás listo para tomar el control de tu bienestar y descubrir el poder que la nutrición puede tener en tu vida?
-        Quisiera guiarte en este viaje hacia una mejor salud y felicidad.
-        Con el enfoque adecuado en la alimentación equilibrada y sostenible, puedes lograr cambios significativos en tu energía, estado de ánimo y bienestar general.
-        Mi objetivo es trabajar contigo para desarrollar un plan personalizado que se adapte a tus necesidades individuales, metas y estilo de vida. No se trata de dietas restrictivas o contar calorías, sino de aprender a tomar decisiones alimenticias saludables y sostenibles que te ayuden a sentirte mejor cada día.
-        Ya sea que estés buscando perder peso, aumentar tu energía, mejorar tu rendimiento deportivo o simplemente adoptar hábitos alimenticios más saludables, estoy aquí para brindarte el apoyo y la orientación que necesitas para alcanzar tus objetivos.
-        Juntos, podemos trabajar para crear un cambio positivo y duradero en tu vida. ¿Estás listo para comenzar este emocionante viaje hacia una versión más saludable y feliz de ti mismo? ¡Contáctame hoy mismo y demos el primer paso hacia una nueva y vibrante tú!</p>
-      <a href="#contacto" class="btn btn-primary">Agenda una consulta</a>
+      <h2>Bienvenido a tu cambio de habito.</h2>
+      <p>Me presento! Mi nombre es Marina, soy licenciada en Nutrición 🥦, egresada de la UBA en 2012. Actualmente trabajo para el municipio de Lanús en el área de la salud pública, donde realizo diferentes tareas como atención en consultorio, dictado de talleres y charlas en diferentes instituciones y además recibo estudiantes que realizan sus prácticas pre profesionales.
+        Soy docente universitaria de la universidad nacional de Lanus en 3 asignaturas y de la UAI, como referente en prácticas.
+        Además realizo asesorías on line para todo el mundo 🌎 tanto de niños como adultos. Brindo atención en diferentes situaciones como embarazo y adulto mayor. Realizo educación alimentaria, como pilar de los tratamientos. Las consultas pueden ser para aprender a alimentarse mejor o brindar lineamientos frente a alguna enfermedad como diabetes, sobrepeso, hipertension, colesterol alto, etc.
+        Espero que les sirva la info que les voy a ir compartiendo y no duden en consultarme. Cuando quieras soy tu nutri 😉. Un abrazo 🤗</p>
     </div>
-    <div class="col-md-4">
-      <img src="assets/img/marina_claros.png" class="img-fluid">
+    <div class="col-md-4 mt-3">
+      <img class="img-fluid" src="assets/img/marina_claros.png">
     </div>
   </div>
 
@@ -43,8 +39,8 @@
   </section>
 </div>
 
-<a href="https://wa.me/1137921389" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-  <i class="fab fa-whatsapp"></i>
+<a href="" id="nav_item" title="Agendar consulta." class="consulta-btn btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;"><i class="fa-regular fa-calendar-check"> Reservar cita</i></a>
+<a href="https://wa.me/91136146176?text=Hola,%20me%20gustaría%20reservar%20una%20cita!" class="whatsapp-btn btn btn-success" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp"> ¿Cómo puedo ayudarte?</i>
 </a>
-
 <?php require './assets/template/footer.php' ?>

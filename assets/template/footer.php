@@ -18,7 +18,16 @@
     </div>
   </div>
 </footer>
-  <script src="./assets/dataTables/datatables.min.js"></script>
-  <script src="./assets/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables JS-->
+<script src="./assets/dataTables/datatables.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="./assets/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- Calendly JS -->
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<!-- Custom JS -->
+<script src="./assets/js/funciones.js"></script>
+
 </body>
+
 </html>

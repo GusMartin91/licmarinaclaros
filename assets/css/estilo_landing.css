@@ -3,11 +3,16 @@
   padding: 0;
 }
 .navbar-nav .nav-link {
-  color: #000 !important;
+  color: #000;
 }
-
+.navbar-nav {
+  align-items: end;
+}
+.img-fluid {
+  border-radius: 50%;
+}
 .navbar-toggler-icon:not(.navbar-toggler-icon .navbar-toggler-icon) {
-  color: #000 !important; /* Cambia el color del ícono a negro */
+  color: #000;
 }
 
 .section-text {
@@ -42,29 +47,49 @@
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-  background-color: #25d366;
+  background-color: #18c457;
   color: #fff;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  border-radius: 36px;
   text-align: center;
-  font-size: 30px;
-  line-height: 60px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 25px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 .whatsapp-btn:hover {
   background-color: #128c7e;
   text-decoration: none;
 }
+.consulta-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  z-index: 1000;
+  background-color: rgb(198, 62, 143);
+  color: #fff;
+  border-radius: 36px;
+  text-align: center;
+  font-size: 25px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+.consulta-btn:hover {
+  background-color: rgb(150, 34, 103);
+  color: #fff;
+  text-decoration: none;
+}
 
 #nav_item:hover {
   text-decoration: underline;
-  font-weight:600;
+  font-weight: 600;
 }
 @keyframes rotateLogo {
-  0% { transform: rotateY(0deg); }
-  50% { transform: rotateY(90deg); }
-  100% { transform: rotateY(0deg); }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
 }
 
 .navbar-logo {
@@ -74,6 +99,6 @@
 .navbar-logo:hover {
   animation: rotateLogo 2s infinite;
 }
-#sobre_mi{
+#sobre_mi {
   text-align: justify;
 }

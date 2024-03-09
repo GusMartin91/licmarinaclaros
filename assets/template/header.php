@@ -7,14 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="./assets/img/vegetables.png" type="image/x-icon">
-    <!-- DataTables -->
+    <!-- DataTables CSS-->
     <link rel="stylesheet" type="text/css" href="./assets/datatables/dataTables.min.css">
-    <!-- Font Awesome -->
+    <!-- Font Awesome CSS-->
     <link rel="stylesheet" type="text/css" href="./assets/fontawesome/css/all.min.css">
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="./assets/bootstrap-5.3.0/css/bootstrap.min.css">
-    <!-- Cropper -->
+    <!-- Cropper CSS-->
     <link rel="stylesheet" href="./assets/cropper/cropper.min.css">
+    <!-- Calendly CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/estilo_landing.css">
 </head>
@@ -26,7 +28,7 @@
                 <a class="navbar-brand" href="#">
                     <img class="navbar-logo" src="assets/img/logo_nutricion.jpeg" alt="Logo" style="width: 100px;">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,7 +43,7 @@
                             <a id="nav_item" class="nav-link" href="#testimonios">Testimonios</a>
                         </li>
                         <li class="nav-item">
-                            <a id="nav_item" class="nav-link" href="#contacto">Contacto</a>
+                            <a href="" id="nav_item" class="nav-link" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">Agendar Consulta</a>
                         </li>
                     </ul>
                 </div>
