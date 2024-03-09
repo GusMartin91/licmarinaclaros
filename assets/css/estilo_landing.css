@@ -51,7 +51,7 @@
   color: #fff;
   border-radius: 36px;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 .whatsapp-btn:hover {
@@ -67,7 +67,7 @@
   color: #fff;
   border-radius: 36px;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 .consulta-btn:hover {
@@ -101,4 +101,18 @@
 }
 #sobre_mi {
   text-align: justify;
+}
+.social-icon{
+  text-decoration: none;
+  color: #000000;
+}
+.fa-instagram {
+  color: #f83a21;
+}
+.btn .text {
+  display: none;
+}
+
+.btn:hover .text {
+  display: inline-block;
 }

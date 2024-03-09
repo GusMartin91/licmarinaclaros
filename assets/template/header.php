@@ -43,7 +43,7 @@
                             <a id="nav_item" class="nav-link" href="#testimonios">Testimonios</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" id="nav_item" class="nav-link" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">Agendar Consulta</a>
+                            <a href="" id="nav_item" class="nav-link" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">Reservar Cita</a>
                         </li>
                     </ul>
                 </div>

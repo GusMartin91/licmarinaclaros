@@ -1,15 +1,7 @@
 <footer class="bg-light text-center py-4">
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <h5>Sígueme en las redes sociales</h5>
-        <div class="social-icons">
-          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.instagram.com/esaesminutri" class="social-icon"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </div>
+    <div class="col">
+      <h5><a href="https://www.instagram.com/esaesminutri" class="social-icon">Seguime en <b><i class="iconoInsta fa-brands fa-instagram fa-bounce fa-xl"></i> Instagram</b> para ver las ultimas novedades.</a></h5>
     </div>
     <div class="row mt-3">
       <div class="col">

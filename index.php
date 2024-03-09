@@ -39,8 +39,13 @@
   </section>
 </div>
 
-<a href="" id="nav_item" title="Agendar consulta." class="consulta-btn btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;"><i class="fa-regular fa-calendar-check"> Reservar cita</i></a>
-<a href="https://wa.me/91136146176?text=Hola,%20me%20gustaría%20reservar%20una%20cita!" class="whatsapp-btn btn btn-success" target="_blank" rel="noopener noreferrer">
-  <i class="fab fa-whatsapp"> ¿Cómo puedo ayudarte?</i>
+<a href="" id="nav_item" title="Agendar consulta." class="consulta-btn btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">
+  <i class="fa-regular fa-calendar-check fa-lg"></i><span class="text ms-2">Reservar cita.</span>
 </a>
+
+<a href="https://wa.me/91136146176?text=Hola,%20me%20gustaría%20reservar%20una%20cita!" class="whatsapp-btn btn btn-success" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp fa-lg"></i>
+  <span class="text">¿Cómo puedo ayudarte?</span>
+</a>
+
 <?php require './assets/template/footer.php' ?>
