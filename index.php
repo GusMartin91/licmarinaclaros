@@ -1,4 +1,5 @@
 <?php require './assets/template/header.php' ?>
+
 <title>Lic. Marina Claros</title>
 <div class="container mt-5">
   <div class="row mb-4">
@@ -48,4 +49,7 @@
   <span class="text">¿Cómo puedo ayudarte?</span>
 </a>
 
-<?php require './assets/template/footer.php' ?>
+<?php
+
+require './assets/template/footer.php' ;
+include './registro/modal_registro.php';?>

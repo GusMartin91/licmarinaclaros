@@ -45,6 +45,13 @@
                         <li class="nav-item">
                             <a href="" id="nav_item" class="nav-link" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">Reservar Cita</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal_registro" class="nav-link">| <i class="fa-solid fa-user-plus"></i> Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-bs-toggle="modal_login" data-bs-target="#modal_login" class="nav-link">| <i class="fa-sharp fa-solid fa-lock"></i> Iniciar sesion</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
