@@ -1,4 +1,4 @@
-<?php require './assets/template/header.php' ?>
+<?php require './assets/template/header.php';?>
 
 <title>Lic. Marina Claros</title>
 <div class="container mt-5">
@@ -50,6 +50,7 @@
 </a>
 
 <?php
-
-require './assets/template/footer.php' ;
-include './registro/modal_registro.php';?>
+include './registro/modal_registro.php';
+include './login/modal_login.php';
+require './assets/template/footer.php';
+?>

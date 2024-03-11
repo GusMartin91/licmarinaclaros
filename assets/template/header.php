@@ -1,4 +1,7 @@
-<?php include('./assets/conexion/conexion.php'); ?>
+<?php
+include('./assets/conexion/conexion.php');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -49,7 +52,8 @@
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal_registro" class="nav-link">| <i class="fa-solid fa-user-plus"></i> Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" data-bs-toggle="modal_login" data-bs-target="#modal_login" class="nav-link">| <i class="fa-sharp fa-solid fa-lock"></i> Iniciar sesion</a>
+                            <a href="#" id="boton_iniciar_sesion" data-bs-toggle="modal" data-bs-target="#modal_login" class="nav-link">| <i class="fa-solid fa-key"></i> Iniciar sesion</a>
+                            <a href="#" id="boton_cerrar_sesion" class="nav-link" hidden>| <i class="fa-sharp fa-solid fa-lock"></i> Cerrar sesion</a>
                         </li>
 
                     </ul>

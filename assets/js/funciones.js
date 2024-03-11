@@ -40,6 +40,7 @@ function verificarDNI() {
     };
     xhr.send(`dni=${dni}`);
 }
+
 function mostrarAlerta(mensaje) {
     Swal.fire({
         icon: 'error',

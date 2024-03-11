@@ -7,10 +7,10 @@ $generos = $con->query($sqlGeneros);
         <div class="modal-content">
             <div class="modal-header" style="background-color: #21dff8 !important;">
                 <h1 class="modal-title fs-5" id="modal_registroLabel">Registro del Paciente.</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal_registro" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./registro/backend_registro.php" id="form" method="post" enctype="multipart/form-data">
+                <form action="./registro/backend_registro.php" id="form_registro" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <div class="col-6 mb-2">
                             <label for="nombre" class="form-label">Nombre/s:</label>
@@ -74,7 +74,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="submit" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
+                        <button type="submit" id="submit_registro" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
                         <button type="button" id="elbotoncerrar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cerrar</button>
                     </div>
                 </form>
