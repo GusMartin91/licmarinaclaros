@@ -20,6 +20,7 @@
 <!-- Custom JS -->
 <script src="./assets/js/funciones.js"></script>
 <script src="./assets/js/funciones_login.js"></script>
+<script src="./assets/js/funciones_login_recupero.js"></script>
 <script src="./assets/js/funciones_registro.js"></script>
 <script src="./assets/sweetalert/sweetalert2.all.min.js"></script>
 

@@ -1,7 +1,3 @@
-<?php
-$sqlGeneros = "SELECT * FROM generos";
-$generos = $con->query($sqlGeneros);
-?>
 <div class="modal fade" id="modal_login" tabindex="-1" aria-labelledby="modal_loginLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -25,10 +21,10 @@ $generos = $con->query($sqlGeneros);
                         </div>
                         <hr>
                         <div class="text-center mt-1">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal_registro" class="nav-link"> <i class="fa-solid fa-user-plus"></i> Registrarse</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal_registro" class="nav-link"><i class="fa-solid fa-user-plus"></i> Registrarse</a>
                         </div>
                         <div class="text-center">
-                            <a class="small text-black text-decoration-none" href="blanqueopass.php"><i class="fa-solid fa-question"></i> Olvide mi Contraseña</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal_login_recupero" class="nav-link"><i class="fa-solid fa-question"></i> Olvide mi Contraseña</a>
                         </div>
                     </div>
                 </form>

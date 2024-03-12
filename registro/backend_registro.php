@@ -48,11 +48,9 @@ $userAgent = $_SERVER['HTTP_USER_AGENT'];
 $sistema_operativo = obtenerSistemaOperativo($userAgent);
 $navegador = obtenerNavegador($userAgent);
 
-// $usuario = $_SESSION['dni'];
-
 $camposFormulario = [
     'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'genero',
-    'altura', 'peso', 'observaciones', 'pseguridad', 'rseguridad'
+    'altura', 'peso', 'observaciones', 'pseguridad', ''
 ];
 $datos = [];
 foreach ($camposFormulario as $campo) {
@@ -60,9 +58,10 @@ foreach ($camposFormulario as $campo) {
 }
 
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+$rseguridad = password_hash($_POST['rseguridad'], PASSWORD_BCRYPT);
 $tipo_auditoria = 'Registro';
 $sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
-        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", '{$datos['genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '{$datos['rseguridad']}')";
+        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", '{$datos['genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad')";
 
 if (mysqli_query($con, $sqlInsert)) {
     $id_paciente = obtenerID();

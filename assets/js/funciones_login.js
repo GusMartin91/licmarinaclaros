@@ -4,6 +4,7 @@ const input_dni = document.getElementById('dni_login');
 const boton_cerrar = document.getElementById('boton_cerrar');
 const boton_iniciar_sesion = document.getElementById('boton_iniciar_sesion');
 const boton_cerrar_sesion = document.getElementById('boton_cerrar_sesion');
+const boton_registrarse = document.getElementById('boton_registrarse');
 
 function checkSession() {
     fetch('./login/check_session.php')
@@ -12,8 +13,10 @@ function checkSession() {
             if (data.loggedIn) {
                 boton_cerrar_sesion.hidden = false
                 boton_iniciar_sesion.hidden = true
+                boton_registrarse.hidden = true
             } else {
                 boton_cerrar_sesion.hidden = true
+                boton_registrarse.hidden = false
                 boton_iniciar_sesion.hidden = false
             }
         });
@@ -33,28 +36,30 @@ boton_cerrar_sesion.addEventListener('click', () => {
                 title: '¡Hasta pronto!',
                 text: 'Gracias por usar nuestro sistema. Te esperamos pronto.',
                 showConfirmButton: true,
-                confirmButtonColor: '#51dff8',
+                confirmButtonColor: '#2141f8',
                 confirmButtonText: 'Hasta luego',
             }).then(() => {
                 window.location.href = "index.php";
             });
             boton_cerrar_sesion.hidden = true
+            boton_registrarse.hidden = false
             boton_iniciar_sesion.hidden = false
         });
-});
-form_login.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(form_login);
-
-    fetch('./login/backend_login.php', {
-        method: 'POST',
-        body: formData
-    }).then(function (response) {
-        return response.json();
-    }).then(function (respuesta) {
-        if (respuesta.success) {
-            boton_iniciar_sesion.hidden = true
+    });
+    form_login.addEventListener('submit', function (event) {
+        event.preventDefault();
+        
+        const formData = new FormData(form_login);
+        
+        fetch('./login/backend_login.php', {
+            method: 'POST',
+            body: formData
+        }).then(function (response) {
+            return response.json();
+        }).then(function (respuesta) {
+            if (respuesta.success) {
+                boton_iniciar_sesion.hidden = true
+                boton_registrarse.hidden = true
             boton_cerrar_sesion.hidden = false
             boton_cerrar.click()
             Swal.fire({
@@ -62,7 +67,7 @@ form_login.addEventListener('submit', function (event) {
                 title: respuesta.name,
                 text: respuesta.message,
                 showConfirmButton: false,
-                timer: 3000
+                timer: 2000
             })
         } else {
             form_login.reset()

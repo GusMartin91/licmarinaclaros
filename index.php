@@ -52,5 +52,6 @@
 <?php
 include './registro/modal_registro.php';
 include './login/modal_login.php';
+include './login_recupero/modal_login_recupero.php';
 require './assets/template/footer.php';
 ?>
