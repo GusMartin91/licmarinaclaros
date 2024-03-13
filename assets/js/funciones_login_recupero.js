@@ -93,8 +93,7 @@ function verificarEmailValido() {
                 rseguridad_login_recupero.disabled = false
                 rseguridad_login_recupero.setAttribute('placeholder', 'Ingrese su respuesta secreta')
                 label_email.innerHTML = 'E-mail: <i class="fa-solid fa-circle-check" style="color: #05a808;"></i>'
-                let pseguridad = respuesta.pseguridad
-                pseguridad_login_recupero.value = pseguridad
+                pseguridad_login_recupero.value = respuesta.pseguridad
             } else {
                 div_pseg.hidden = true
                 div_rseg.hidden = true
@@ -165,7 +164,13 @@ function submit_recupero() {
                         icon: 'success',
                         title: "¡Contraseña cambiada exitosamente!",
                         text: "Su contraseña ha sido actualizada correctamente. Puede iniciar sesión con su nueva contraseña.",
-                        confirmButtonText: 'Aceptar',
+                        confirmButtonText: 'Iniciar Sesión',
+                        showCancelButton: true,
+                        cancelButtonText: 'Salir',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('boton_iniciar_sesion').click();
+                        }
                     });
                     boton_cerrar_re.click()
                 } else {

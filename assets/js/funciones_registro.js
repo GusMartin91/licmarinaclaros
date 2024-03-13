@@ -1,6 +1,9 @@
 const form_registro = document.getElementById('form_registro');
 const modal_registro = document.getElementById('modal_registro');
 const input_nombre = document.getElementById('nombre');
+const mensaje = document.getElementById('mensaje_confirmacion');
+const input_password = document.getElementById('password');
+const input_password2 = document.getElementById('password2');
 
 
 modal_registro.addEventListener('hidden.bs.modal', function () {
@@ -59,4 +62,16 @@ function mostrarAlerta(mensaje) {
         title: 'Atención',
         text: mensaje
     });
+}
+
+function confirma_pass() {
+    if (input_password.value === input_password2.value) {
+        input_password2.style.border = '2px solid green';
+        mensaje.innerText = 'Las contraseñas coinciden';
+        mensaje.style.color = 'green';
+    } else {
+        input_password2.style.border = '2px solid red';
+        mensaje.innerText = 'Las contraseñas no coinciden';
+        mensaje.style.color = 'red';
+    }
 }

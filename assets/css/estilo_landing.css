@@ -8,9 +8,7 @@
 .navbar-nav {
   align-items: end;
 }
-.img-fluid {
-  border-radius: 50%;
-}
+
 .navbar-toggler-icon:not(.navbar-toggler-icon .navbar-toggler-icon) {
   color: #000;
 }

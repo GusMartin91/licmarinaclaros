@@ -19,7 +19,6 @@ function obtenerIP()
     }
     return $ip;
 }
-
 function obtenerSistemaOperativo($userAgent)
 {
     if (strpos($userAgent, 'Windows') !== false) {
@@ -36,7 +35,6 @@ function obtenerSistemaOperativo($userAgent)
         return 'Otro';
     }
 }
-
 function obtenerNavegador($userAgent)
 {
     $infoNavegador = get_browser(null, true);
@@ -67,7 +65,16 @@ if (mysqli_query($con, $sqlInsert)) {
     $id_paciente = obtenerID();
     $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, ip_cliente, sistema_operativo, browser) VALUES ('$tipo_auditoria', '$id_paciente', '{$datos['dni']}', '$ip_cliente', '$sistema_operativo', '$navegador')";
     mysqli_query($con, $sqlAudita);
-    header("Location: ../index.php");
+    echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro Exitoso',
+                text: '¡Te has registrado exitosamente!',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = '../index.php';
+            });
+          </script>";
 } else {
     echo "Error al guardar los datos: " . mysqli_error($con);
 }

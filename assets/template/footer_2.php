@@ -12,17 +12,15 @@
 </footer>
 
 <!-- DataTables JS-->
-<script src="./assets/dataTables/datatables.min.js"></script>
+<script src="../assets/dataTables/datatables.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="./assets/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
-<!-- Calendly JS -->
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script src="../assets/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 JS -->
+<script src="../assets/sweetalert/sweetalert2.all.min.js"></script>
 <!-- Custom JS -->
-<script src="./assets/sweetalert/sweetalert2.all.min.js"></script>
-<script src="./assets/js/funciones.js"></script>
-<script src="./assets/js/funciones_login.js"></script>
-<script src="./assets/js/funciones_login_recupero.js"></script>
-<script src="./assets/js/funciones_registro.js"></script>
+<script src="../assets/dataTables/moment.min.js"></script>
+<script src="../assets/js/funciones_admin.js"></script>
+<script src="../assets/js/funciones.js"></script>
 
 </body>
 

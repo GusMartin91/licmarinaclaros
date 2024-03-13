@@ -14,7 +14,7 @@
       <img class="img-fluid" src="assets/img/marina_claros.png">
     </div>
   </div>
-
+  
   <section id="servicios" class="section section-bg" style="background-image: url('assets/img/img101.jpg');">
     <div class="bg-overlay"></div>
     <div class="container">

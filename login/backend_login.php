@@ -59,16 +59,19 @@ if (mysqli_num_rows($result) === 0) {
     if (password_verify($password_login, $pacienteBD['password'])) {
         $_SESSION['id_paciente'] = $pacienteBD['id_paciente'];
         $_SESSION['dni'] = $pacienteBD['dni'];
+        $_SESSION['apellido'] = $pacienteBD['apellido'];
+        $_SESSION['nombre'] = $pacienteBD['nombre'];
         $_SESSION['rol'] = $pacienteBD['rol'];
         $_SESSION['logged_in'] = true;
-
+        $_SESSION['tiempoInicio'] = time();
         $sqlInsert = "INSERT INTO login (dni, ip_cliente, sistema_operativo, navegador) 
         VALUES ('$dni_login', '$ip_cliente', '$sistema_operativo', '$navegador')";
         mysqli_query($con, $sqlInsert);
         echo json_encode([
             'success' => true,
             'name' => $pacienteBD['nombre'] . ' ' . $pacienteBD['apellido'],
-            'message' => 'Bienvenido al sistema.'
+            'message' => 'Bienvenido al sistema.',
+            'rol' => $pacienteBD['rol']
         ]);
         exit;
     } else {

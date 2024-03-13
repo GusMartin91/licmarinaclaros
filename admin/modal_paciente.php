@@ -2,15 +2,15 @@
 $sqlGeneros = "SELECT * FROM generos";
 $generos = $con->query($sqlGeneros);
 ?>
-<div class="modal fade" id="modal_registro" tabindex="-1" aria-labelledby="modal_registroLabel" aria-hidden="true">
+<div class="modal fade" id="modal_paciente" tabindex="-1" aria-labelledby="modal_pacienteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #21dff8 !important;">
-                <h1 class="modal-title fs-5" id="modal_registroLabel">Registro del Paciente.</h1>
+                <h1 class="modal-title fs-5" id="modal_pacienteLabel">paciente del Paciente.</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./registro/backend_registro.php" id="form_registro" method="post" enctype="multipart/form-data">
+                <form action="./backend_paciente.php" id="form_paciente" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="nombre" class="form-label">Nombre/s:</label>
@@ -79,7 +79,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="submit_registro" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
+                        <button type="submit" id="submit_paciente" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
                         <button type="button" id="elbotoncerrar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cerrar</button>
                     </div>
                 </form>
