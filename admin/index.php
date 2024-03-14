@@ -1,5 +1,10 @@
-<?php require '../assets/template/header_2.php'; ?>
-
+<?php require '../assets/template/header_2.php';
+$swal_message = [];
+if (isset($_SESSION['swal_message'])) {
+    $swal_message = $_SESSION['swal_message'];
+    unset($_SESSION['swal_message']);
+}
+?>
 <title>Panel de Admin</title>
 
 <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -20,7 +25,7 @@
     <div class="tab-pane fade show active" id="pacientes-tab-pane" role="tabpanel" aria-labelledby="pacientes-tab" tabindex="0">
         <div class="container align-items-center justify-content-center mt-3">
             <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_paciente"><i class="fa-regular fa-user-plus"></i> Agregar Paciente</a>
+                <a href="#" class="btn btn-success" onclick="botonNuevo()" data-bs-toggle="modal" data-bs-target="#modal_paciente"><i class="fa-regular fa-user-plus"></i> Ingresar Paciente</a>
             </div>
             <div class="table">
                 <table id="tabla_pacientes" class="table table-bordered table-striped responsive nowrapx">
@@ -56,3 +61,7 @@
 require './modal_paciente.php';
 require '../assets/template/footer_2.php';
 ?>
+<script>
+    const swalMessage = <?php echo json_encode($swal_message); ?>;
+    mostrarAlertaRegistro(swalMessage);
+</script>

@@ -10,7 +10,18 @@ $generos = $con->query($sqlGeneros);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./backend_paciente.php" id="form_paciente" method="post" enctype="multipart/form-data">
+                <form action="./backend_pacientes.php" id="form_paciente" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="movimiento" id="movimiento">
+                    <input type="hidden" name="id_paciente" id="id_paciente">
+                    <input type="hidden" name="nombre_actual" id="nombre_actual">
+                    <input type="hidden" name="apellido_actual" id="apellido_actual">
+                    <input type="hidden" name="id_genero_actual" id="id_genero_actual">
+                    <input type="hidden" name="fecha_nacimiento_actual" id="fecha_nacimiento_actual">
+                    <input type="hidden" name="telefono_actual" id="telefono_actual">
+                    <input type="hidden" name="email_actual" id="email_actual">
+                    <input type="hidden" name="altura_actual" id="altura_actual">
+                    <input type="hidden" name="peso_actual" id="peso_actual">
+                    <input type="hidden" name="observaciones_actual" id="observaciones_actual">
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="nombre" class="form-label">Nombre/s:</label>
@@ -25,8 +36,8 @@ $generos = $con->query($sqlGeneros);
                             <input type="text" name="dni" id="dni" class="form-control" onchange="verificarDNI()" required>
                         </div>
                         <div class="col-xs-12 col-sm-4 mb-2">
-                            <label for="genero" class="form-label">Genero:</label>
-                            <select name="genero" id="genero" class="form-select">
+                            <label for="id_genero" class="form-label">Genero:</label>
+                            <select name="id_genero" id="id_genero" class="form-select">
                                 <option value="" selected disaled hidden>Seleccionar...</option>
                                 <?php while ($row_genero = $generos->fetch_assoc()) { ?>
                                     <option value="<?php echo $row_genero["id_genero"]; ?>"><?= $row_genero["desc_genero"] ?></option>
@@ -62,7 +73,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="rseguridad" class="form-label">Respuesta secreta:</label>
-                            <input type="text" class="form-control" id="rseguridad" name="rseguridad" placeholder="Respuesta de seguridad" required>
+                            <input type="password" class="form-control" id="rseguridad" name="rseguridad" placeholder="Respuesta de seguridad" required>
                         </div>
                         <hr>
                         <div class="col-xs-12 col-sm-6 mb-2">
@@ -79,7 +90,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="submit_paciente" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
+                        <button type="submit" id="submit_paciente" class="btn btn-primary"></button>
                         <button type="button" id="elbotoncerrar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cerrar</button>
                     </div>
                 </form>

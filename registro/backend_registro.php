@@ -47,7 +47,7 @@ $sistema_operativo = obtenerSistemaOperativo($userAgent);
 $navegador = obtenerNavegador($userAgent);
 
 $camposFormulario = [
-    'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'genero',
+    'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'id_genero',
     'altura', 'peso', 'observaciones', 'pseguridad', ''
 ];
 $datos = [];
@@ -58,26 +58,20 @@ foreach ($camposFormulario as $campo) {
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 $rseguridad = password_hash($_POST['rseguridad'], PASSWORD_BCRYPT);
 $tipo_auditoria = 'Registro';
-$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
+$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
         VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", '{$datos['genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad')";
 
 if (mysqli_query($con, $sqlInsert)) {
     $id_paciente = obtenerID();
     $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, ip_cliente, sistema_operativo, browser) VALUES ('$tipo_auditoria', '$id_paciente', '{$datos['dni']}', '$ip_cliente', '$sistema_operativo', '$navegador')";
     mysqli_query($con, $sqlAudita);
-    echo "<script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Registro Exitoso',
-                text: '¡Te has registrado exitosamente!',
-                confirmButtonText: 'OK'
-            }).then(() => {
-                window.location.href = '../index.php';
-            });
-          </script>";
+    $_SESSION['swal_message'] = [
+        'icon' => 'success',
+        'title' => 'Registro Exitoso',
+        'text' => '¡Te has registrado exitosamente!',
+        'confirmButtonText' => 'OK',
+      ];
+      header('Location: ../index.php');
 } else {
     echo "Error al guardar los datos: " . mysqli_error($con);
 }
-
-?>
-<script src="../assets/dataTables/datatables.min.js"></script>

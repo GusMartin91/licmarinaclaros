@@ -25,8 +25,8 @@ $generos = $con->query($sqlGeneros);
                             <input type="text" name="dni" id="dni" class="form-control" onchange="verificarDNI()" required>
                         </div>
                         <div class="col-xs-12 col-sm-4 mb-2">
-                            <label for="genero" class="form-label">Genero:</label>
-                            <select name="genero" id="genero" class="form-select">
+                            <label for="id_genero" class="form-label">Genero:</label>
+                            <select name="id_genero" id="id_genero" class="form-select">
                                 <option value="" selected disaled hidden>Seleccionar...</option>
                                 <?php while ($row_genero = $generos->fetch_assoc()) { ?>
                                     <option value="<?php echo $row_genero["id_genero"]; ?>"><?= $row_genero["desc_genero"] ?></option>
@@ -62,7 +62,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="rseguridad" class="form-label">Respuesta secreta:</label>
-                            <input type="text" class="form-control" id="rseguridad" name="rseguridad" placeholder="Respuesta de seguridad" required>
+                            <input type="password" class="form-control" id="rseguridad" name="rseguridad" placeholder="Respuesta de seguridad" required>
                         </div>
                         <hr>
                         <div class="col-xs-12 col-sm-6 mb-2">

@@ -1,4 +1,10 @@
-<?php require './assets/template/header.php';?>
+<?php require './assets/template/header.php';
+$swal_message = [];
+if (isset($_SESSION['swal_message'])) {
+  $swal_message = $_SESSION['swal_message'];
+  unset($_SESSION['swal_message']);
+}
+?>
 
 <title>Lic. Marina Claros</title>
 <div class="container mt-5">
@@ -14,7 +20,7 @@
       <img class="img-fluid" src="assets/img/marina_claros.png">
     </div>
   </div>
-  
+
   <section id="servicios" class="section section-bg" style="background-image: url('assets/img/img101.jpg');">
     <div class="bg-overlay"></div>
     <div class="container">
@@ -55,3 +61,7 @@ include './login/modal_login.php';
 include './login_recupero/modal_login_recupero.php';
 require './assets/template/footer.php';
 ?>
+<script>
+  const swalMessage = <?php echo json_encode($swal_message); ?>;
+  mostrarAlertaRegistro(swalMessage);
+</script>

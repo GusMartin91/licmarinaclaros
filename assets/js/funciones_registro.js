@@ -64,6 +64,17 @@ function mostrarAlerta(mensaje) {
     });
 }
 
+function mostrarAlertaRegistro(swalMessage) {
+    if (swalMessage != '') {
+        Swal.fire({
+            icon: swalMessage.icon,
+            title: swalMessage.title,
+            text: swalMessage.text,
+            confirmButtonText: swalMessage.confirmButtonText
+        });
+    }
+}
+
 function confirma_pass() {
     if (input_password.value === input_password2.value) {
         input_password2.style.border = '2px solid green';

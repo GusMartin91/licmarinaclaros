@@ -1,9 +1,14 @@
 const form_paciente = document.getElementById('form_paciente');
 const modal_paciente = document.getElementById('modal_paciente');
+const modal_pacienteLabel = document.getElementById('modal_pacienteLabel');
+const submit_paciente = document.getElementById('submit_paciente');
 const input_nombre = document.getElementById('nombre');
+const input_dni = document.getElementById('dni');
 const mensaje = document.getElementById('mensaje_confirmacion');
 const input_password = document.getElementById('password');
 const input_password2 = document.getElementById('password2');
+const input_pseguridad = document.getElementById('pseguridad');
+const input_rseguridad = document.getElementById('rseguridad');
 let usuario = document.getElementById('usuario_hidden_admin').value
 let today = new Date();
 let currentMonth = ('0' + (today.getMonth() + 1)).substr(-2);
@@ -24,8 +29,10 @@ $(document).ready(function () {
                 let datosBoton = {
                     id_paciente: response[i].id_paciente || '',
                     dni: response[i].dni || '',
+                    pseguridad: response[i].pseguridad || '',
                     nombre: response[i].nombre || '',
                     apellido: response[i].apellido || '',
+                    id_genero: response[i].id_genero || '',
                     desc_genero: response[i].desc_genero || '',
                     altura: response[i].altura || '',
                     peso: response[i].peso || '',
@@ -46,10 +53,10 @@ $(document).ready(function () {
                     '<td>' + datosBoton.edad + '</td>' +
                     '<td>' + datosBoton.fecha_ultima_consulta + '</td>' +
                     '<td>' + datosBoton.fecha_proxima_consulta + '</td>' +
-                    '<td>' + '<i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-trash"></i>'
-                // `<button title="Editar" onclick="botonEditar()" class="btn btn-sm espacio_botones btn-warning" data-bs-toggle="modal" data-bs-target="#modal" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
-                // `<button title="Eliminar" class="btn btn-danger btn-sm espacio_botones" onclick="gestionarEliminar(event)" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-trash"></i></button>` +
-                '</td>' +
+                    '<td>' +
+                    `<button title="Editar" onclick="botonEditar()" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modal_paciente" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
+                    `<button title="Eliminar" class="btn btn-danger btn-sm" onclick="gestionarEliminar(event)" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-trash"></i></button>` +
+                    '</td>' +
                     '</tr>';
 
                 $('#tabla_pacientes tbody').append(fila);
@@ -171,8 +178,87 @@ $(document).ready(function () {
     });
 });
 
+function botonNuevo() {
+    function onModalShown(event) {
+        modal_pacienteLabel.innerText = "Ingresar nuevo paciente"
+        submit_paciente.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Ingresar'
+        modal_paciente.querySelector('.modal-body #movimiento').value = 'A'
+        modal_paciente.removeEventListener('shown.bs.modal', onModalShown);
+    }
+    modal_paciente.addEventListener('shown.bs.modal', onModalShown);
+}
+function botonEditar() {
+    function onModalShown(event) {
+        modal_pacienteLabel.innerText = "Modificar registro del paciente"
+        submit_paciente.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Modificar'
+        modal_paciente.querySelector('.modal-body #movimiento').value = 'U'
+        input_password.disabled = true
+        input_password2.disabled = true
+        input_pseguridad.disabled = true
+        input_rseguridad.disabled = true
+        input_dni.disabled = true
+        let button = event.relatedTarget
+        let datos = JSON.parse(button.getAttribute('data-bs-datos'));
+        modal_paciente.querySelector('.modal-body #id_paciente').value = datos.id_paciente
+        modal_paciente.querySelector('.modal-body #dni').value = datos.dni
+        modal_paciente.querySelector('.modal-body #nombre').value = datos.nombre
+        modal_paciente.querySelector('.modal-body #apellido').value = datos.apellido
+        modal_paciente.querySelector('.modal-body #id_genero').value = datos.id_genero
+        modal_paciente.querySelector('.modal-body #fecha_nacimiento').value = datos.fecha_nacimiento
+        modal_paciente.querySelector('.modal-body #telefono').value = datos.telefono
+        modal_paciente.querySelector('.modal-body #email').value = datos.email
+        modal_paciente.querySelector('.modal-body #altura').value = datos.altura
+        modal_paciente.querySelector('.modal-body #peso').value = datos.peso
+        modal_paciente.querySelector('.modal-body #observaciones').value = datos.observaciones
+        modal_paciente.querySelector('.modal-body #nombre_actual').value = datos.nombre
+        modal_paciente.querySelector('.modal-body #apellido_actual').value = datos.apellido
+        modal_paciente.querySelector('.modal-body #id_genero_actual').value = datos.id_genero
+        modal_paciente.querySelector('.modal-body #fecha_nacimiento_actual').value = datos.fecha_nacimiento
+        modal_paciente.querySelector('.modal-body #telefono_actual').value = datos.telefono
+        modal_paciente.querySelector('.modal-body #email_actual').value = datos.email
+        modal_paciente.querySelector('.modal-body #altura_actual').value = datos.altura
+        modal_paciente.querySelector('.modal-body #peso_actual').value = datos.peso
+        modal_paciente.querySelector('.modal-body #observaciones_actual').value = datos.observaciones
+        modal_paciente.removeEventListener('shown.bs.modal', onModalShown);
+    }
+    modal_paciente.addEventListener('shown.bs.modal', onModalShown);
+}
+
+function gestionarEliminar(event) {
+    let button = event.currentTarget;
+    let datos = JSON.parse(button.getAttribute('data-bs-datos'));
+    datos.movimiento = "D"
+
+    Swal.fire({
+        title: '¡Atención!',
+        text: '¿Desea eliminar definitivamente el registro?',
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Eliminar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let form = $('<form action=\'backend_pacientes.php\' method=\'post\'></form>');
+            form.append('<input type=\'hidden\' name=\'id_paciente\' value=\'' + datos.id_paciente + '\'>');
+            form.append('<input type=\'hidden\' name=\'movimiento\' value=\'' + datos.movimiento + '\'>');
+            form.append('<input type=\'hidden\' name=\'dni\' value=\'' + datos.dni + '\'>');
+            form.append('<input type=\'hidden\' name=\'pseguridad\' value=\'' + datos.pseguridad + '\'>');
+            for (let dato in datos) {
+                form.append(`<input type='hidden' name='${dato}_actual' value='${datos[dato]}'>`);
+            }
+            $('body').append(form);
+            form.submit();
+        }
+    });
+}
 
 modal_paciente.addEventListener('hidden.bs.modal', function () {
+    input_password.disabled = false
+    input_password2.disabled = false
+    input_pseguridad.disabled = false
+    input_rseguridad.disabled = false
+    input_dni.disabled = false
     form_paciente.reset()
 });
 modal_paciente.addEventListener('shown.bs.modal', function () {
@@ -228,6 +314,16 @@ function mostrarAlerta(mensaje) {
         title: 'Atención',
         text: mensaje
     });
+}
+function mostrarAlertaRegistro(swalMessage) {
+    if (swalMessage != '') {
+        Swal.fire({
+            icon: swalMessage.icon,
+            title: swalMessage.title,
+            text: swalMessage.text,
+            confirmButtonText: swalMessage.confirmButtonText
+        });
+    }
 }
 
 function confirma_pass() {
