@@ -39,10 +39,10 @@ $(document).ready(function () {
                     telefono: response[i].telefono || '',
                     email: response[i].email || '',
                     fecha_nacimiento: response[i].fecha_nacimiento || '',
-                    edad: response[i].edad || '',
-                    rol: response[i].rol || '',
                     fecha_ultima_consulta: response[i].fecha_ultima_consulta || '',
                     fecha_proxima_consulta: response[i].fecha_proxima_consulta || '',
+                    edad: response[i].edad || '',
+                    rol: response[i].rol || '',
                     observaciones: response[i].observaciones || '',
                     movimiento: response[i].movimiento || '',
                 }
@@ -163,7 +163,7 @@ $(document).ready(function () {
                         "sortable": false,
                         "targets": [6]
                     }, {
-                        targets: (4, 5),
+                        targets: [(4), (5)],
                         render: DataTable.render.datetime('DD/MM/YYYY'),
                     },
                     {
@@ -205,6 +205,8 @@ function botonEditar() {
         modal_paciente.querySelector('.modal-body #apellido').value = datos.apellido
         modal_paciente.querySelector('.modal-body #id_genero').value = datos.id_genero
         modal_paciente.querySelector('.modal-body #fecha_nacimiento').value = datos.fecha_nacimiento
+        modal_paciente.querySelector('.modal-body #fecha_ultima_consulta').value = datos.fecha_ultima_consulta
+        modal_paciente.querySelector('.modal-body #fecha_proxima_consulta').value = datos.fecha_proxima_consulta
         modal_paciente.querySelector('.modal-body #telefono').value = datos.telefono
         modal_paciente.querySelector('.modal-body #email').value = datos.email
         modal_paciente.querySelector('.modal-body #altura').value = datos.altura
@@ -214,6 +216,8 @@ function botonEditar() {
         modal_paciente.querySelector('.modal-body #apellido_actual').value = datos.apellido
         modal_paciente.querySelector('.modal-body #id_genero_actual').value = datos.id_genero
         modal_paciente.querySelector('.modal-body #fecha_nacimiento_actual').value = datos.fecha_nacimiento
+        modal_paciente.querySelector('.modal-body #fecha_ultima_consulta_actual').value = datos.fecha_ultima_consulta
+        modal_paciente.querySelector('.modal-body #fecha_proxima_consulta_actual').value = datos.fecha_proxima_consulta
         modal_paciente.querySelector('.modal-body #telefono_actual').value = datos.telefono
         modal_paciente.querySelector('.modal-body #email_actual').value = datos.email
         modal_paciente.querySelector('.modal-body #altura_actual').value = datos.altura

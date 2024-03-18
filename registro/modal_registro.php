@@ -45,6 +45,14 @@ $generos = $con->query($sqlGeneros);
                             <label for="email" class="form-label">E-mail:</label>
                             <input type="email" name="email" id="email" class="form-control" onchange="verificarEmail()" required>
                         </div>
+                        <div class="col-xs-12 col-sm-6 mb-2">
+                            <label for="fecha_ultima_consulta" class="form-label">Fecha ultima consulta:</label>
+                            <input type="date" name="fecha_ultima_consulta" id="fecha_ultima_consulta" class="form-control" required>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 mb-2">
+                            <label for="fecha_proxima_consulta" class="form-label">Fecha proxima consulta:</label>
+                            <input type="date" name="fecha_proxima_consulta" id="fecha_proxima_consulta" class="form-control" required>
+                        </div>
                         <hr>
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="password" class="form-label">Contraseña:</label>

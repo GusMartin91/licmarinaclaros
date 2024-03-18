@@ -53,8 +53,8 @@ $aplicativo = 'Admin';
 $ruta_aplicativo = './admin/index.php';
 
 $camposFormulario = [
-    'id_paciente', 'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'id_genero',
-    'altura', 'peso', 'observaciones', 'nombre_actual', 'apellido_actual', 'telefono_actual', 'email_actual', 'fecha_nacimiento_actual', 'id_genero_actual',
+    'id_paciente', 'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'fecha_ultima_consulta', 'fecha_proxima_consulta', 'id_genero',
+    'altura', 'peso', 'observaciones', 'nombre_actual', 'apellido_actual', 'telefono_actual', 'email_actual', 'fecha_nacimiento_actual', 'fecha_ultima_consulta_actual', 'fecha_proxima_consulta_actual', 'id_genero_actual',
     'altura_actual', 'peso_actual', 'observaciones_actual', 'pseguridad', 'movimiento'
 ];
 $datos = [];
@@ -65,18 +65,18 @@ $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWO
 $rseguridad = isset($_POST['rseguridad']) ? password_hash($_POST['rseguridad'], PASSWORD_BCRYPT) : '';
 
 $actualizacionCampos = [
-    'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'id_genero',
+    'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'fecha_ultima_consulta', 'fecha_proxima_consulta', 'id_genero',
     'altura', 'peso', 'observaciones'
 ];
 switch ($datos['movimiento']) {
     case 'A':
         $tipo_auditoria = 'Alta';
-        $sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad, movimiento, usuario) 
-        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", '{$datos['id_genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad', '{$datos['movimiento']}', '$usuario')";
+        $sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, fecha_ultima_consulta, fecha_proxima_consulta, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad, movimiento, usuario) 
+        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", " . ($datos['fecha_ultima_consulta'] ? "'{$datos['fecha_ultima_consulta']}'" : 'NULL') . ", " . ($datos['fecha_proxima_consulta'] ? "'{$datos['fecha_proxima_consulta']}'" : 'NULL') . ", '{$datos['id_genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad', '{$datos['movimiento']}', '$usuario')";
         break;
     case 'U':
         $tipo_auditoria = 'Actualizacion';
-        $sqlUpdate = "UPDATE pacientes SET nombre = '{$datos['nombre']}', apellido = '{$datos['apellido']}', id_genero = '{$datos['id_genero']}', fecha_nacimiento = " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", telefono = '{$datos['telefono']}', email = '{$datos['email']}', altura = '{$datos['altura']}', peso = '{$datos['peso']}', observaciones = '{$datos['observaciones']}', usuario = '$usuario', movimiento = 'M'
+        $sqlUpdate = "UPDATE pacientes SET nombre = '{$datos['nombre']}', apellido = '{$datos['apellido']}', id_genero = '{$datos['id_genero']}', fecha_nacimiento = " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", fecha_ultima_consulta = " . ($datos['fecha_ultima_consulta'] ? "'{$datos['fecha_ultima_consulta']}'" : 'NULL') . ", fecha_proxima_consulta = " . ($datos['fecha_proxima_consulta'] ? "'{$datos['fecha_proxima_consulta']}'" : 'NULL') . ", telefono = '{$datos['telefono']}', email = '{$datos['email']}', altura = '{$datos['altura']}', peso = '{$datos['peso']}', observaciones = '{$datos['observaciones']}', usuario = '$usuario', movimiento = 'M'
         WHERE id_paciente = '{$datos['id_paciente']}'";
         foreach ($actualizacionCampos as $campo) {
             $campoActual = "{$campo}_actual";
