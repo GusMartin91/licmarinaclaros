@@ -19,7 +19,8 @@
 <script src="../assets/sweetalert/sweetalert2.all.min.js"></script>
 <!-- Custom JS -->
 <script src="../assets/dataTables/moment.min.js"></script>
-<script src="../assets/js/funciones_admin.js"></script>
+<script src="../assets/js/funciones_admin_pacientes.js"></script>
+<script src="../assets/js/funciones_admin_HC.js"></script>
 <script src="../assets/js/funciones.js"></script>
 
 </body>

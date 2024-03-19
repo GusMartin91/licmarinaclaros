@@ -4,6 +4,13 @@ if (isset($_SESSION['swal_message'])) {
   $swal_message = $_SESSION['swal_message'];
   unset($_SESSION['swal_message']);
 }
+if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
+  $fecha_proxima_consulta = $_GET['event_start_time'];
+  $email_paciente = $_GET['invitee_email'];
+  $sqlComprobarEmail = "SELECT * FROM pacientes WHERE email = '$email_paciente'";
+  $resultado = mysqli_query($con, $sqlComprobarEmail);
+}
+
 ?>
 
 <title>Lic. Marina Claros</title>
@@ -60,7 +67,36 @@ include './registro/modal_registro.php';
 include './login/modal_login.php';
 include './login_recupero/modal_login_recupero.php';
 require './assets/template/footer.php';
-?>
+
+if (mysqli_num_rows($resultado) == 0) {
+  echo "<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: 'El email del paciente no existe en la base de datos.',
+    showCancelButton: false,
+    showConfirmButton: true,
+    confirmButtonText: 'Registrarse'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      boton_registrarse.click()
+    }
+  });
+  </script>";
+} else {
+  $sqlNuevaConsulta = "UPDATE pacientes SET fecha_proxima_consulta = '$fecha_proxima_consulta' WHERE email = '$email_paciente'";
+  mysqli_query($con, $sqlNuevaConsulta);
+  if (mysqli_affected_rows($con) > 0) {
+    echo "<script>
+      Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'La próxima consulta se ha actualizado correctamente.',
+        timer: 2000
+      });
+    </script>";
+  }
+} ?>
 <script>
   const swalMessage = <?php echo json_encode($swal_message); ?>;
   mostrarAlertaRegistro(swalMessage);
