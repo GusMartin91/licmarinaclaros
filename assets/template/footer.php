@@ -19,6 +19,7 @@
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <!-- Custom JS -->
 <script src="./assets/sweetalert/sweetalert2.all.min.js"></script>
+<script src="./assets/dataTables/moment.min.js"></script>
 <script src="./assets/js/funciones.js"></script>
 <script src="./assets/js/funciones_login.js"></script>
 <script src="./assets/js/funciones_login_recupero.js"></script>

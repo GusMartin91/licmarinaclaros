@@ -71,12 +71,12 @@ require './assets/template/footer.php';
 if (mysqli_num_rows($resultado) == 0) {
   echo "<script>
   Swal.fire({
-    icon: 'error',
-    title: 'Error',
-    text: 'El email del paciente no existe en la base de datos.',
+    icon: 'warning',
+    title: 'Aun no te registraste.',
+    text: 'Clickea en Registrarme para poder ver tus historiales de consultas, tus planes, poder subir tus fotos a tu ficha personal, etc.',
     showCancelButton: false,
     showConfirmButton: true,
-    confirmButtonText: 'Registrarse'
+    confirmButtonText: 'Registrarme'
   }).then((result) => {
     if (result.isConfirmed) {
       boton_registrarse.click()

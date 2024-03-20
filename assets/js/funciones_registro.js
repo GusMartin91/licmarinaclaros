@@ -1,16 +1,32 @@
 const form_registro = document.getElementById('form_registro');
 const modal_registro = document.getElementById('modal_registro');
+const input_email = document.getElementById('email');
 const input_nombre = document.getElementById('nombre');
+const input_apellido = document.getElementById('apellido');
 const mensaje = document.getElementById('mensaje_confirmacion');
 const input_password = document.getElementById('password');
 const input_password2 = document.getElementById('password2');
-
+const input_fecha_proxima_consulta = document.getElementById('fecha_proxima_consulta');
+const fechaProximaConsultaParam = urlParams.get("event_start_time");
+const nombreParam = urlParams.get("invitee_first_name");
+const apellidoParam = urlParams.get("invitee_last_name");
+const emailParam = urlParams.get("invitee_email");
+let fechaProximaConsulta;
+if (fechaProximaConsultaParam) {
+    fechaProximaConsulta = moment(fechaProximaConsultaParam).format("YYYY-MM-DD HH:mm");
+}
 
 modal_registro.addEventListener('hidden.bs.modal', function () {
     form_registro.reset()
 });
 modal_registro.addEventListener('shown.bs.modal', function () {
     input_nombre.focus()
+    if (typeof fechaProximaConsulta !== 'undefined') {
+        input_fecha_proxima_consulta.value = fechaProximaConsulta
+        input_nombre.value = nombreParam
+        input_apellido.value = apellidoParam
+        input_email.value = emailParam
+    }
 });
 
 function verificarEmail() {

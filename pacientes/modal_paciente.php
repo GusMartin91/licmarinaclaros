@@ -2,15 +2,28 @@
 $sqlGeneros = "SELECT * FROM generos";
 $generos = $con->query($sqlGeneros);
 ?>
-<div class="modal fade" id="modal_registro" tabindex="-1" aria-labelledby="modal_registroLabel" aria-hidden="true">
+<div class="modal fade" id="modal_paciente" tabindex="-1" aria-labelledby="modal_pacienteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #21dff8 !important;">
-                <h1 class="modal-title fs-5" id="modal_registroLabel">Registro del Paciente.</h1>
+                <h1 class="modal-title fs-5" id="modal_pacienteLabel"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./registro/backend_registro.php" id="form_registro" method="post" enctype="multipart/form-data">
+                <form action="./backend_pacientes.php" id="form_paciente" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="movimiento" id="movimiento">
+                    <input type="hidden" name="id_paciente" id="id_paciente">
+                    <input type="hidden" name="nombre_actual" id="nombre_actual">
+                    <input type="hidden" name="apellido_actual" id="apellido_actual">
+                    <input type="hidden" name="id_genero_actual" id="id_genero_actual">
+                    <input type="hidden" name="fecha_nacimiento_actual" id="fecha_nacimiento_actual">
+                    <input type="hidden" name="fecha_ultima_consulta_actual" id="fecha_ultima_consulta_actual">
+                    <input type="hidden" name="fecha_proxima_consulta_actual" id="fecha_proxima_consulta_actual">
+                    <input type="hidden" name="telefono_actual" id="telefono_actual">
+                    <input type="hidden" name="email_actual" id="email_actual">
+                    <input type="hidden" name="altura_actual" id="altura_actual">
+                    <input type="hidden" name="peso_actual" id="peso_actual">
+                    <input type="hidden" name="observaciones_actual" id="observaciones_actual">
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="nombre" class="form-label">Nombre/s:</label>
@@ -47,11 +60,11 @@ $generos = $con->query($sqlGeneros);
                         </div>
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="fecha_ultima_consulta" class="form-label">Fecha ultima consulta:</label>
-                            <input type="datetime-local" name="fecha_ultima_consulta" id="fecha_ultima_consulta" class="form-control" required>
+                            <input type="date" name="fecha_ultima_consulta" id="fecha_ultima_consulta" class="form-control" required>
                         </div>
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="fecha_proxima_consulta" class="form-label">Fecha proxima consulta:</label>
-                            <input type="datetime-local" name="fecha_proxima_consulta" id="fecha_proxima_consulta" class="form-control" required>
+                            <input type="date" name="fecha_proxima_consulta" id="fecha_proxima_consulta" class="form-control" required>
                         </div>
                         <hr>
                         <div class="col-xs-12 col-sm-6 mb-2">
@@ -87,7 +100,7 @@ $generos = $con->query($sqlGeneros);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="submit_registro" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i> Registrarse</button>
+                        <button type="submit" id="submit_paciente" class="btn btn-primary"></button>
                         <button type="button" id="elbotoncerrar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cerrar</button>
                     </div>
                 </form>
