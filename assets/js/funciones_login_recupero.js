@@ -46,7 +46,7 @@ function verificarDNIValido() {
         dni,
     };
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "login_recupero/backend_login_recupero.php", true);
+    xhr.open("POST", "../login_recupero/backend_login_recupero.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -82,7 +82,7 @@ function verificarEmailValido() {
     };
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "login_recupero/backend_login_recupero.php", true);
+    xhr.open("POST", "../login_recupero/backend_login_recupero.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -118,7 +118,7 @@ function verificarRSValida() {
         rseguridad,
     };
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "login_recupero/backend_login_recupero.php", true);
+    xhr.open("POST", "../login_recupero/backend_login_recupero.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -154,7 +154,7 @@ function submit_recupero() {
             new_pass,
         };
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "login_recupero/backend_login_recupero.php", true);
+        xhr.open("POST", "../login_recupero/backend_login_recupero.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onload = function () {
             if (xhr.status === 200) {

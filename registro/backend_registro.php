@@ -47,7 +47,7 @@ $sistema_operativo = obtenerSistemaOperativo($userAgent);
 $navegador = obtenerNavegador($userAgent);
 
 $camposFormulario = [
-    'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'fecha_ultima_consulta', 'fecha_proxima_consulta', 'id_genero',
+    'dni', 'nombre', 'apellido', 'telefono', 'email', 'fecha_nacimiento', 'fecha_proxima_consulta', 'id_genero',
     'altura', 'peso', 'observaciones', 'pseguridad', ''
 ];
 $datos = [];
@@ -58,8 +58,8 @@ foreach ($camposFormulario as $campo) {
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 $rseguridad = password_hash($_POST['rseguridad'], PASSWORD_BCRYPT);
 $tipo_auditoria = 'Registro';
-$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, fecha_ultima_consulta, fecha_proxima_consulta, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
-        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", " . ($datos['fecha_ultima_consulta'] ? "'{$datos['fecha_ultima_consulta']}'" : 'NULL') . ", " . ($datos['fecha_proxima_consulta'] ? "'{$datos['fecha_proxima_consulta']}'" : 'NULL') . ", '{$datos['genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad')";
+$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, fecha_proxima_consulta, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
+        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", " . ($datos['fecha_proxima_consulta'] ? "'{$datos['fecha_proxima_consulta']}'" : 'NULL') . ", '{$datos['id_genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad')";
 
 if (mysqli_query($con, $sqlInsert)) {
     $id_paciente = obtenerID();
@@ -71,7 +71,7 @@ if (mysqli_query($con, $sqlInsert)) {
         'text' => '¡Te has registrado exitosamente!',
         'confirmButtonText' => 'OK',
     ];
-    header('Location: ../index.php');
+    header('Location: ../home/index.php');
 } else {
     echo "Error al guardar los datos: " . mysqli_error($con);
 }

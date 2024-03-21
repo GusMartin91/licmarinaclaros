@@ -2,31 +2,9 @@ const form_login = document.getElementById('form_login');
 const modal_login = document.getElementById('modal_login');
 const input_dni = document.getElementById('dni_login');
 const boton_cerrar = document.getElementById('boton_cerrar');
-const boton_iniciar_sesion = document.getElementById('boton_iniciar_sesion');
-const boton_cerrar_sesion = document.getElementById('boton_cerrar_sesion');
-const boton_registrarse = document.getElementById('boton_registrarse');
 const div_boton_admin = document.getElementById('div_boton_admin');
 const boton_admin = document.getElementById('boton_admin');
 
-function checkSession() {
-    fetch('./login/check_session.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.loggedIn) {
-                boton_cerrar_sesion.hidden = false
-                boton_iniciar_sesion.hidden = true
-                boton_registrarse.hidden = true
-            } else {
-                boton_cerrar_sesion.hidden = true
-                if (boton_admin) {
-                    boton_admin.hidden = true
-                }
-                boton_registrarse.hidden = false
-                boton_iniciar_sesion.hidden = false
-            }
-        });
-}
-checkSession()
 modal_login.addEventListener('shown.bs.modal', function () {
     input_dni.focus()
 });
@@ -37,7 +15,7 @@ modal_login.addEventListener('hidden.bs.modal', function () {
 form_login.addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(form_login);
-    fetch('./login/backend_login.php', {
+    fetch('../login/backend_login.php', {
         method: 'POST',
         body: formData
     }).then(function (response) {
@@ -48,7 +26,7 @@ form_login.addEventListener('submit', function (event) {
             boton_registrarse.hidden = true
             boton_cerrar_sesion.hidden = false
             if (respuesta.rol == 'admin') {
-                div_boton_admin.innerHTML = '<a href="./admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a>'
+                div_boton_admin.innerHTML = '<a href="../admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a>'
             }
             boton_cerrar.click()
             Swal.fire({
@@ -70,26 +48,4 @@ form_login.addEventListener('submit', function (event) {
             });
         }
     });
-});
-
-boton_cerrar_sesion.addEventListener('click', () => {
-    fetch('./login/logout.php')
-        .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Hasta pronto!',
-                text: 'Gracias por usar nuestro sistema. Te esperamos pronto.',
-                showConfirmButton: true,
-                confirmButtonColor: '#2141f8',
-                confirmButtonText: 'Hasta luego',
-            }).then(() => {
-                window.location.href = "index.php";
-            });
-            boton_cerrar_sesion.hidden = true
-            if (boton_admin) {
-                boton_admin.hidden = true
-            }
-            boton_registrarse.hidden = false
-            boton_iniciar_sesion.hidden = false
-        });
 });

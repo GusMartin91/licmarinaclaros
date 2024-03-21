@@ -1,9 +1,12 @@
-<?php require './assets/template/header.php';
+<?php require '../assets/template/header.php';
 $swal_message = [];
 if (isset($_SESSION['swal_message'])) {
   $swal_message = $_SESSION['swal_message'];
   unset($_SESSION['swal_message']);
 }
+$resultado;
+$fecha_proxima_consulta;
+$email_paciente;
 if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
   $fecha_proxima_consulta = $_GET['event_start_time'];
   $email_paciente = $_GET['invitee_email'];
@@ -24,11 +27,11 @@ if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
         Espero que les sirva la info que les voy a ir compartiendo y no duden en consultarme. Cuando quieras soy tu nutri 😉. Un abrazo 🤗</p>
     </div>
     <div class="col-md-4 mt-3">
-      <img class="img-fluid" src="assets/img/marina_claros.png">
+      <img class="img-fluid" src="../assets/img/marina_claros.png">
     </div>
   </div>
 
-  <section id="servicios" class="section section-bg" style="background-image: url('assets/img/img101.jpg');">
+  <section id="servicios" class="section section-bg" style="background-image: url('../assets/img/img101.jpg');">
     <div class="bg-overlay"></div>
     <div class="container">
       <h2 class="section-text">Servicios</h2>
@@ -36,7 +39,7 @@ if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
     </div>
   </section>
 
-  <section id="testimonios" class="section section-bg" style="background-image: url('assets/img/img102.jpg');">
+  <section id="testimonios" class="section section-bg" style="background-image: url('../assets/img/img102.jpg');">
     <div class="bg-overlay"></div>
     <div class="container">
       <h2 class="section-text">Testimonios</h2>
@@ -44,7 +47,7 @@ if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
     </div>
   </section>
 
-  <section id="contacto" class="section section-bg" style="background-image: url('assets/img/img103.jpg');">
+  <section id="contacto" class="section section-bg" style="background-image: url('../assets/img/img103.jpg');">
     <div class="bg-overlay"></div>
     <div class="container">
       <h2 class="section-text">Contacto</h2>
@@ -63,12 +66,16 @@ if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
 </a>
 
 <?php
-include './registro/modal_registro.php';
-include './login/modal_login.php';
-include './login_recupero/modal_login_recupero.php';
-require './assets/template/footer.php';
-
-if (mysqli_num_rows($resultado) == 0) {
+include '../registro/modal_registro.php';
+include '../login/modal_login.php';
+include '../login_recupero/modal_login_recupero.php';
+require '../assets/template/footer.php';
+?>
+<script src="../assets/js/funciones_login.js"></script>
+<script src="../assets/js/funciones_login_recupero.js"></script>
+<script src="../assets/js/funciones_registro.js"></script>
+<?php
+if (isset($resultado) && mysqli_num_rows($resultado) == 0) {
   echo "<script>
   Swal.fire({
     icon: 'warning',
@@ -83,12 +90,12 @@ if (mysqli_num_rows($resultado) == 0) {
     }
   });
   </script>";
-} else {
+} elseif (isset($resultado) && mysqli_num_rows($resultado) > 1) {
   $sqlNuevaConsulta = "UPDATE pacientes SET fecha_proxima_consulta = '$fecha_proxima_consulta' WHERE email = '$email_paciente'";
   mysqli_query($con, $sqlNuevaConsulta);
   if (mysqli_affected_rows($con) > 0) {
     echo "<script>
-      Swal.fire({
+    Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
         text: 'La próxima consulta se ha actualizado correctamente.',
@@ -96,8 +103,15 @@ if (mysqli_num_rows($resultado) == 0) {
       });
     </script>";
   }
-} ?>
+}
+?>
 <script>
   const swalMessage = <?php echo json_encode($swal_message); ?>;
   mostrarAlertaRegistro(swalMessage);
 </script>
+
+
+
+</body>
+
+</html>

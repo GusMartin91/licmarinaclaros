@@ -6,7 +6,7 @@
                 <button type="button" id="boton_cerrar" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-0">
-                <form action="./login/backend_login.php" id="form_login" method="post" enctype="multipart/form-data">
+                <form action="../login/backend_login.php" id="form_login" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <div class="col-12 mb-2">
                             <label for="dni_login" class="form-label">DNI:</label>

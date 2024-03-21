@@ -10,7 +10,8 @@ $generos = $con->query($sqlGeneros);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="./registro/backend_registro.php" id="form_registro" method="post" enctype="multipart/form-data">
+                <form action="../registro/backend_registro.php" id="form_registro" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="fecha_proxima_consulta" id="fecha_proxima_consulta" class="form-control">
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="nombre" class="form-label">Nombre/s:</label>
@@ -44,14 +45,6 @@ $generos = $con->query($sqlGeneros);
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="email" class="form-label">E-mail:</label>
                             <input type="email" name="email" id="email" class="form-control" onchange="verificarEmail()" required>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 mb-2">
-                            <label for="fecha_ultima_consulta" class="form-label">Fecha ultima consulta:</label>
-                            <input type="datetime-local" name="fecha_ultima_consulta" id="fecha_ultima_consulta" class="form-control" required>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 mb-2">
-                            <label for="fecha_proxima_consulta" class="form-label">Fecha proxima consulta:</label>
-                            <input type="datetime-local" name="fecha_proxima_consulta" id="fecha_proxima_consulta" class="form-control" required>
                         </div>
                         <hr>
                         <div class="col-xs-12 col-sm-6 mb-2">

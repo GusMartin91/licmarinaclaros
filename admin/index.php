@@ -1,4 +1,8 @@
-<?php require '../assets/template/header_2.php';
+<?php require '../assets/template/header.php';
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    header('Location: ../index.php');
+    exit;
+}
 $swal_message = [];
 if (isset($_SESSION['swal_message'])) {
     $swal_message = $_SESSION['swal_message'];
@@ -83,8 +87,10 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 <?php
 require './modal_paciente.php';
 require './modal_HC.php';
-require '../assets/template/footer_2.php';
+require '../assets/template/footer.php';
 ?>
+<script src="../assets/js/funciones_admin_pacientes.js"></script>
+<script src="../assets/js/funciones_admin_HC.js"></script>
 <script>
     const swalMessage = <?php echo json_encode($swal_message); ?>;
     mostrarAlertaRegistro(swalMessage);
