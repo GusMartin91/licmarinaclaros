@@ -1,0 +1,23 @@
+const form_paciente = document.getElementById('form_paciente');
+const modal_paciente = document.getElementById('modal_paciente');
+const modal_pacienteLabel = document.getElementById('modal_pacienteLabel');
+const submit_paciente = document.getElementById('submit_paciente');
+const input_nombre = document.getElementById('nombre');
+const input_dni = document.getElementById('dni');
+const mensaje = document.getElementById('mensaje_confirmacion');
+const input_password = document.getElementById('password');
+const input_password2 = document.getElementById('password2');
+const input_pseguridad = document.getElementById('pseguridad');
+const input_rseguridad = document.getElementById('rseguridad');
+let dni_paciente = document.getElementById('dni_paciente').value
+
+let usuario = document.getElementById('usuario_hidden_admin').value
+let today = new Date();
+let currentMonth = ('0' + (today.getMonth() + 1)).substr(-2);
+let currentDate = ('0' + today.getDate()).substr(-2);
+let currentHours = ('0' + today.getHours()).substr(-2);
+let currentMins = ('0' + today.getMinutes()).substr(-2);
+let currentSecs = ('0' + today.getSeconds()).substr(-2);
+let date = currentDate + '-' + currentMonth + '-' + today.getFullYear();
+let time = currentHours + ":" + currentMins + ":" + currentSecs;
+let dateTime = date + ' a las ' + time;

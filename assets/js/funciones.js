@@ -29,6 +29,9 @@ function checkSession() {
                 if (boton_admin) {
                     boton_admin.hidden = true
                 }
+                if (boton_paciente) {
+                    boton_paciente.hidden = true
+                }
                 boton_registrarse.hidden = false
                 boton_iniciar_sesion.hidden = false
             }

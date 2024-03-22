@@ -66,12 +66,12 @@ $actualizacionCampos = [
 switch ($datos['movimiento_HC']) {
     case 'A':
         $tipo_auditoria = 'Alta';
-        $sqlInsert = "INSERT INTO historial_consultas (dni_paciente, observaciones, fecha_consulta, peso, movimiento, usuario) 
+        $sqlInsert = "INSERT INTO historial_consultas (dni_paciente, observaciones_nutri, fecha_consulta, peso, movimiento, usuario) 
         VALUES ('{$datos['dni_HC']}', '{$datos['observaciones_HC']}', " . ($datos['fecha_consulta_HC'] ? "'{$datos['fecha_consulta_HC']}'" : 'NULL') . ", '{$datos['peso_HC']}', '{$datos['movimiento_HC']}', '$usuario')";
         break;
     case 'U':
         $tipo_auditoria = 'Actualizacion';
-        $sqlUpdate = "UPDATE historial_consultas SET fecha_consulta = " . ($datos['fecha_consulta_HC'] ? "'{$datos['fecha_consulta_HC']}'" : 'NULL') . ", peso = '{$datos['peso_HC']}', observaciones = '{$datos['observaciones_HC']}', usuario = '$usuario', movimiento = 'M'
+        $sqlUpdate = "UPDATE historial_consultas SET fecha_consulta = " . ($datos['fecha_consulta_HC'] ? "'{$datos['fecha_consulta_HC']}'" : 'NULL') . ", peso = '{$datos['peso_HC']}', observaciones_nutri = '{$datos['observaciones_HC']}', usuario = '$usuario', movimiento = 'M'
         WHERE id_consulta = '{$datos['id_consulta']}'";
         foreach ($actualizacionCampos as $campo) {
             $campoActual = "{$campo}_actual";

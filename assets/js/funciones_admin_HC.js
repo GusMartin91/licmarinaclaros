@@ -21,7 +21,7 @@ function tabla_HC() {
                         apellido: response[i].apellido || '',
                         peso: response[i].peso || '',
                         fecha_consulta: response[i].fecha_consulta || '',
-                        observaciones: response[i].observaciones || '',
+                        observaciones_nutri: response[i].observaciones_nutri || '',
                         movimiento: response[i].movimiento || '',
                     }
                     let fila = '<tr>' +
@@ -180,10 +180,10 @@ function botonEditar_HC() {
         modal_HC.querySelector('.modal-body #id_consulta').value = datos.id_consulta
         modal_HC.querySelector('.modal-body #fecha_proxima_consulta').value = datos.fecha_proxima_consulta
         modal_HC.querySelector('.modal-body #peso').value = datos.peso
-        modal_HC.querySelector('.modal-body #observaciones').value = datos.observaciones
+        modal_HC.querySelector('.modal-body #observaciones').value = datos.observaciones_nutri
         modal_HC.querySelector('.modal-body #fecha_proxima_consulta_actual').value = datos.fecha_proxima_consulta
         modal_HC.querySelector('.modal-body #peso_actual').value = datos.peso
-        modal_HC.querySelector('.modal-body #observaciones_actual').value = datos.observaciones
+        modal_HC.querySelector('.modal-body #observaciones_actual').value = datos.observaciones_nutri
         modal_HC.removeEventListener('shown.bs.modal', onModalShown);
     }
     modal_HC.addEventListener('shown.bs.modal', onModalShown);
