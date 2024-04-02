@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200mm" height="200mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 20000 20000"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ data-name="Layer 1">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#083B43;stroke-width:400;stroke-linecap:round;stroke-linejoin:round}
+    .str0 {stroke:#083B43;stroke-width:826.82;stroke-linecap:round;stroke-linejoin:round}
+    .fil0 {fill:none}
+    .fil1 {fill:#083B43}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="10000" cy="10472" r="1405"/>
+  <polygon class="fil0 str0" points="11910,7789 11360,6845 8640,6845 8090,7789 5370,7789 5370,13155 14630,13155 14630,7789 "/>
+  <circle class="fil1" cx="13382" cy="9028" r="475"/>
+  <line class="fil0 str1" x1="14258" y1="5517" x2="16481" y2= "5517" />
+  <line class="fil0 str1" x1="15370" y1="4406" x2="15370" y2= "6628" />
+ </g>
+</svg>

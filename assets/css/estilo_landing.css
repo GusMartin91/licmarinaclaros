@@ -128,3 +128,44 @@
 #tabla_HC_paciente {
   width: 100%;
 }
+
+.textdeco {
+  text-align: center;
+  text-decoration: underline #77ff00;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.imagenprevia {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.preview {
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+  margin: 10px;
+  border: 1px solid #0b5ed7;
+}
+#fotoPaciente {
+  position: relative;
+  overflow: hidden;
+}
+
+
+#fotoPaciente:hover #foto-paciente {
+  opacity: 0.6;
+}
+
+#fotoPaciente:hover #icon-camera {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+#icon-camera {
+  display: none;
+}

@@ -33,7 +33,11 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
                         </div>
                         <div class="card-body row">
                             <div class="col-xs-12 col-sm-4" id="fotoPaciente">
-                                <img src="../assets/img/profile_demo.jpeg" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
+                                <label for="file-upload" class="form-label textdeco">
+                                    <img src="../assets/img/profiles/default_profile.png" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
+                                    <img src="../assets/img/profiles/camera.svg" class="rounded-circle  w-100" id="icon-camera" hidden>
+                                </label>
+                                <input type="file" id="file-upload" class="image" hidden>
                             </div>
                             <ul class="list-group col-xs-12 col-sm-8">
                                 <li class="list-group-item">Nombre completo: <strong>[Nombre completo del paciente]</strong></li>
@@ -113,6 +117,8 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 </div>
 
 <?php
+require './modalConfirma.php';
+require './modalFoto.php';
 require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_paciente.js"></script>

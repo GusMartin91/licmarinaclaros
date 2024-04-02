@@ -85,8 +85,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                             <?php if (isset($_SESSION['rol'])) { ?>
                                 <?php if ($_SESSION['rol'] == "admin") { ?>
                                     <a href="../admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a>
+                                    <a href="../paciente/index.php" id="boton_paciente_a" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>
                                 <?php } elseif ($_SESSION['rol'] == "paciente") { ?>
-                                    <a href="../paciente/index.php" id="boton_paciente" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>
+                                    <a href="../paciente/index.php" id="boton_paciente_p" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>
                                 <?php } ?>
                             <?php } ?>
                         </li>

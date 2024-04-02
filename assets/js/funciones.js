@@ -1,6 +1,9 @@
 const boton_cerrar_sesion = document.getElementById('boton_cerrar_sesion')
 const boton_iniciar_sesion = document.getElementById('boton_iniciar_sesion');
 const boton_registrarse = document.getElementById('boton_registrarse');
+const fotoPaciente = document.getElementById('fotoPaciente');
+const icon_camera = document.getElementById('icon-camera');
+const foto_paciente = document.getElementById('foto-paciente');
 
 const urlParams = new URLSearchParams(window.location.search);
 const sessionExpired = urlParams.get('session_expired');
@@ -29,8 +32,11 @@ function checkSession() {
                 if (boton_admin) {
                     boton_admin.hidden = true
                 }
-                if (boton_paciente) {
-                    boton_paciente.hidden = true
+                if (boton_paciente_p) {
+                    boton_paciente_p.hidden = true
+                }
+                if (boton_paciente_a) {
+                    boton_paciente_a.hidden = true
                 }
                 boton_registrarse.hidden = false
                 boton_iniciar_sesion.hidden = false

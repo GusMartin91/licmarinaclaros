@@ -21,5 +21,7 @@
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <!-- Moment JS -->
 <script src="../assets/dataTables/moment.min.js"></script>
+<!-- Cropper JS -->
+<script src="../assets/cropper/cropper.min.js"></script>
 <!-- Custom JS -->
 <script src="../assets/js/funciones.js"></script>

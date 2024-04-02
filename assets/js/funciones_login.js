@@ -3,7 +3,8 @@ const modal_login = document.getElementById('modal_login');
 const input_dni = document.getElementById('dni_login');
 const boton_cerrar = document.getElementById('boton_cerrar');
 const div_boton_admin = document.getElementById('div_boton_admin');
-const boton_paciente = document.getElementById('boton_paciente');
+const boton_paciente_a = document.getElementById('boton_paciente_a');
+const boton_paciente_p = document.getElementById('boton_paciente_p');
 const boton_admin = document.getElementById('boton_admin');
 
 modal_login.addEventListener('shown.bs.modal', function () {
@@ -27,9 +28,9 @@ form_login.addEventListener('submit', function (event) {
             boton_registrarse.hidden = true
             boton_cerrar_sesion.hidden = false
             if (respuesta.rol == 'admin') {
-                div_boton_admin.innerHTML = '<a href="../admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a>'
+                div_boton_admin.innerHTML = '<a href="../admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a><a href="../paciente/index.php" id="boton_paciente_a" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>'
             } else if (respuesta.rol == 'paciente') {
-                div_boton_admin.innerHTML = '<a href="../paciente/index.php" id="boton_paciente" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>'
+                div_boton_admin.innerHTML = '<a href="../paciente/index.php" id="boton_paciente_p" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>'
             }
             boton_cerrar.click()
             Swal.fire({

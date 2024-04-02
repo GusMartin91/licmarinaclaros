@@ -259,7 +259,7 @@ function botonFicha() {
 
         modal_ficha_pacienteLabel.innerHTML = `Ficha personal de <strong>${datos.apellido}, ${datos.nombre}</strong>`
         document.getElementById('foto-paciente').src = "../assets/" + datos.foto_perfil;
-        modal_ficha_paciente.querySelector('#fotoPaciente img').alt = `Foto de ${datos.apellido}, ${datos.nombre}`;
+        modal_ficha_paciente.querySelector('#fotoPaciente_admin img').alt = `Foto de ${datos.apellido}, ${datos.nombre}`;
         modal_ficha_paciente.querySelector('.list-group-item:nth-child(1) strong').textContent = datos.apellido + ", " + datos.nombre;
         modal_ficha_paciente.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;
         modal_ficha_paciente.querySelector('.list-group-item:nth-child(3) strong').textContent = datos.edad;

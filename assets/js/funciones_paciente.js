@@ -30,16 +30,38 @@ function fichaPaciente() {
         if (xhr.status === 200) {
             const paciente = JSON.parse(xhr.responseText);
             if (paciente) {
+                let dni = paciente.dni
                 const fechaNacimiento = paciente.fecha_nacimiento;
                 const fechaFormateada = fechaNacimiento.split('-').reverse().join('-');
                 document.getElementById('titulo_ficha').innerHTML = `Ficha personal de <strong>${paciente.apellido}, ${paciente.nombre}</strong>`
+                document.getElementById('dni_paciente_foto').value = dni;
+                const formData = new FormData();
+                formData.append('dni', dni);
+                const url = './consulta_ultimo_id_foto.php';
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            let idMasReciente = data.id ? data.id : 0;
+                            document.getElementById('id_historial_foto').value = idMasReciente;
+                        } else {
+                            console.error(data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
                 document.getElementById('foto-paciente').src = "../assets/" + paciente.foto_perfil;
                 pacientes_tab_pane.querySelector('#fotoPaciente img').alt = `Foto de ${paciente.apellido}, ${paciente.nombre}`;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(1) strong').textContent = paciente.apellido + ", " + paciente.nombre;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(3) strong').textContent = paciente.edad;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(4) strong').textContent = paciente.desc_genero;
-                pacientes_tab_pane.querySelector('.list-group-item:nth-child(5) strong').textContent = paciente.dni;
+                pacientes_tab_pane.querySelector('.list-group-item:nth-child(5) strong').textContent = dni;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(6) strong').textContent = paciente.telefono;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(7) strong').textContent = paciente.email;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(8) strong').textContent = paciente.direccion;
@@ -64,3 +86,12 @@ function fichaPaciente() {
     xhr.send(`dni_paciente=${dni_paciente}`);
 };
 fichaPaciente()
+
+if (fotoPaciente) {
+    fotoPaciente.addEventListener('mouseenter', () => {
+        icon_camera.hidden = false
+    })
+    fotoPaciente.addEventListener('mouseleave', () => {
+        icon_camera.hidden = true
+    })
+}
