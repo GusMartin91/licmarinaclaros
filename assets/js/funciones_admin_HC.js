@@ -142,7 +142,7 @@ function tabla_HC() {
                             targets: [1],
                             render: DataTable.render.datetime('DD/MM/YYYY'),
                         }, {
-                            width: "10px",
+                            width: "8%",
                             targets: [4]
                         }, {
                             width: "50px",

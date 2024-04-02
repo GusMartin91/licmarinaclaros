@@ -39,6 +39,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
                 <table id="tabla_pacientes" class="table table-bordered table-striped responsive nowrapx">
                     <thead>
                         <tr>
+                            <th>Foto</th>
                             <th>Apellido</th>
                             <th>Nombre</th>
                             <th>Genero</th>
@@ -86,6 +87,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 
 <?php
 require './modal_paciente.php';
+require './modal_ficha_paciente.php';
 require './modal_HC.php';
 require '../assets/template/footer.php';
 ?>

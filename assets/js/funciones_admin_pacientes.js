@@ -1,6 +1,8 @@
 const form_paciente = document.getElementById('form_paciente');
 const modal_paciente = document.getElementById('modal_paciente');
 const modal_pacienteLabel = document.getElementById('modal_pacienteLabel');
+const modal_ficha_paciente = document.getElementById('modal_ficha_paciente');
+const modal_ficha_pacienteLabel = document.getElementById('modal_ficha_pacienteLabel');
 const submit_paciente = document.getElementById('submit_paciente');
 const input_nombre = document.getElementById('nombre');
 const input_dni = document.getElementById('dni');
@@ -29,6 +31,7 @@ function tabla_pacientes() {
                 $('#tabla_pacientes tbody').empty();
                 for (let i = 0; i < response.length; i++) {
                     let datosBoton = {
+                        foto_perfil: response[i].foto_perfil || '',
                         id_paciente: response[i].id_paciente || '',
                         dni: response[i].dni || '',
                         pseguridad: response[i].pseguridad || '',
@@ -40,15 +43,30 @@ function tabla_pacientes() {
                         peso: response[i].peso || '',
                         telefono: response[i].telefono || '',
                         email: response[i].email || '',
+                        direccion: response[i].direccion || '',
                         fecha_nacimiento: response[i].fecha_nacimiento || '',
                         fecha_ultima_consulta: response[i].fecha_ultima_consulta || '',
                         fecha_proxima_consulta: response[i].fecha_proxima_consulta || '',
                         edad: response[i].edad || '',
+                        historial_medico: response[i].historial_medico || '',
+                        alergias: response[i].alergias || '',
+                        intolerancia: response[i].intolerancia || '',
+                        medicamentos: response[i].medicamentos || '',
+                        vacunas: response[i].vacunas || '',
+                        enfermedades: response[i].enfermedades || '',
+                        pruebas_diagnosticas: response[i].pruebas_diagnosticas || '',
+                        comidas_x_dia: response[i].comidas_x_dia || '',
+                        horario_comidas: response[i].horario_comidas || '',
+                        plato_preferido: response[i].plato_preferido || '',
+                        bebida_preferida: response[i].bebida_preferida || '',
+                        debilidad: response[i].debilidad || '',
+                        cocina: response[i].cocina || '',
                         rol: response[i].rol || '',
                         observaciones: response[i].observaciones || '',
                         movimiento: response[i].movimiento || '',
                     }
                     let fila = '<tr>' +
+                        '<td><img src="../assets/' + datosBoton.foto_perfil + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil"></td>' +
                         '<td>' + datosBoton.apellido + '</td>' +
                         '<td>' + datosBoton.nombre + '</td>' +
                         '<td>' + datosBoton.desc_genero + '</td>' +
@@ -56,6 +74,7 @@ function tabla_pacientes() {
                         '<td>' + datosBoton.fecha_ultima_consulta + '</td>' +
                         '<td>' + datosBoton.fecha_proxima_consulta + '</td>' +
                         '<td>' +
+                        `<button title="Ficha" onclick="botonFicha()" class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#modal_ficha_paciente" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-user"></i></button>` +
                         `<button title="Editar" onclick="botonEditar()" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modal_paciente" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
                         `<button title="Eliminar" class="btn btn-danger btn-sm" onclick="gestionarEliminar(event)" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-trash"></i></button>` +
                         '</td>' +
@@ -64,7 +83,7 @@ function tabla_pacientes() {
                     $('#tabla_pacientes tbody').append(fila);
                 }
                 $('#tabla_pacientes').DataTable({
-                    order: [[0, 'asc']],
+                    order: [[1, 'asc']],
                     language: {
                         url: "../assets/dataTables/Spanish.json"
                     },
@@ -160,17 +179,17 @@ function tabla_pacientes() {
                     columnDefs: [
                         {
                             className: "noExportar",
-                            "targets": [6]
+                            "targets": [7]
                         }, {
                             "sortable": false,
-                            "targets": [6]
+                            "targets": [7]
                         }, {
-                            targets: [(4), (5)],
+                            targets: [(5), (6)],
                             render: DataTable.render.datetime('DD/MM/YYYY'),
                         },
                         {
-                            width: "10px",
-                            targets: (3, 6)
+                            width: "11%",
+                            targets: (7)
                         }],
                 });
             },
@@ -193,8 +212,8 @@ function botonNuevo() {
 function botonEditar() {
     function onModalShown(event) {
         modal_pacienteLabel.innerText = "Modificar registro del paciente"
-        submit_paciente.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Modificar'
         modal_paciente.querySelector('.modal-body #movimiento').value = 'U'
+        submit_paciente.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Modificar'
         input_password.disabled = true
         input_password2.disabled = true
         input_pseguridad.disabled = true
@@ -229,6 +248,42 @@ function botonEditar() {
         modal_paciente.removeEventListener('shown.bs.modal', onModalShown);
     }
     modal_paciente.addEventListener('shown.bs.modal', onModalShown);
+}
+
+function botonFicha() {
+    function onModalShown(event) {
+        let button = event.relatedTarget
+        let datos = JSON.parse(button.getAttribute('data-bs-datos'));
+        const fechaNacimiento = datos.fecha_nacimiento;
+        const fechaFormateada = fechaNacimiento.split('-').reverse().join('-');
+
+        modal_ficha_pacienteLabel.innerHTML = `Ficha personal de <strong>${datos.apellido}, ${datos.nombre}</strong>`
+        document.getElementById('foto-paciente').src = "../assets/" + datos.foto_perfil;
+        modal_ficha_paciente.querySelector('#fotoPaciente img').alt = `Foto de ${datos.apellido}, ${datos.nombre}`;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(1) strong').textContent = datos.apellido + ", " + datos.nombre;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(3) strong').textContent = datos.edad;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(4) strong').textContent = datos.desc_genero;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(5) strong').textContent = datos.dni;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(6) strong').textContent = datos.telefono;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(7) strong').textContent = datos.email;
+        modal_ficha_paciente.querySelector('.list-group-item:nth-child(8) strong').textContent = datos.direccion;
+        modal_ficha_paciente.querySelector('#historial_medico strong').textContent = datos.historial_medico;
+        modal_ficha_paciente.querySelector('#alergias strong').textContent = datos.alergias;
+        modal_ficha_paciente.querySelector('#intolerancia strong').textContent = datos.intolerancia;
+        modal_ficha_paciente.querySelector('#medicamentos strong').textContent = datos.medicamentos;
+        modal_ficha_paciente.querySelector('#vacunas strong').textContent = datos.vacunas;
+        modal_ficha_paciente.querySelector('#enfermedades strong').textContent = datos.enfermedades;
+        modal_ficha_paciente.querySelector('#pruebas_diagnosticas strong').textContent = datos.pruebas_diagnosticas;
+        modal_ficha_paciente.querySelector('#plato_preferido strong').textContent = datos.plato_preferido;
+        modal_ficha_paciente.querySelector('#bebida_preferida strong').textContent = datos.bebida_preferida;
+        modal_ficha_paciente.querySelector('#debilidad strong').textContent = datos.debilidad;
+        modal_ficha_paciente.querySelector('#cocina strong').textContent = datos.cocina;
+        modal_ficha_paciente.querySelector('#comidas_x_dia strong').textContent = datos.comidas_x_dia;
+        modal_ficha_paciente.querySelector('#horario_comidas strong').textContent = datos.horario_comidas;
+        modal_ficha_paciente.removeEventListener('shown.bs.modal', onModalShown);
+    }
+    modal_ficha_paciente.addEventListener('shown.bs.modal', onModalShown);
 }
 
 function gestionarEliminar(event) {
