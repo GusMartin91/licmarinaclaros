@@ -9,7 +9,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 
 <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="pacientes-tab" data-bs-toggle="tab" data-bs-target="#pacientes-tab-pane" type="button" role="tab" aria-controls="pacientes-tab-pane" aria-selected="true">Pacientes</button>
+        <button class="nav-link active" id="pacientes-tab" onclick="fichaPaciente()" data-bs-toggle="tab" data-bs-target="#pacientes-tab-pane" type="button" role="tab" aria-controls="pacientes-tab-pane" aria-selected="true">Ficha Paciente</button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="historial_consulta-tab" onclick="tabla_HC_paciente()" data-bs-toggle="tab" data-bs-target="#historial_consulta-tab-pane" type="button" role="tab" aria-controls="historial_consulta-tab-pane" aria-selected="false">Historial de consultas</button>
@@ -24,6 +24,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="pacientes-tab-pane" role="tabpanel" aria-labelledby="pacientes-tab" tabindex="0">
         <div class="container fluid">
+            <h2 class="text-center mt-3 mb-2" id="titulo_ficha"></h2>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <div class="card">
