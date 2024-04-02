@@ -41,7 +41,6 @@ function tabla_HC_paciente() {
                             url: "../assets/dataTables/Spanish.json"
                         },
                         responsive: true,
-                        colReorder: true,
                         dom: '<"container-flex"<"row justify-content-between align-items-center"<"col-auto"l><"col-auto"B><"col-auto"f>><"col-12"t><"row justify-content-between align-items-center"<"col-auto"i><"col-auto mt-2"p>>r>',
                         buttons: [{
                             extend: 'copy',
@@ -137,11 +136,11 @@ function tabla_HC_paciente() {
                                 targets: [1],
                                 render: DataTable.render.datetime('DD/MM/YYYY'),
                             }, {
-                                width: "34%",
+                                width: "36%",
                                 targets: [3, 4]
                             }, {
-                                width: "8%",
-                                targets: [2]
+                                width: "9%",
+                                targets: [0, 1, 2]
                             }
                         ],
                     });

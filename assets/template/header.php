@@ -2,8 +2,8 @@
 include('../assets/conexion/conexion.php');
 
 session_start();
-$UrlActual = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];;
-if ($UrlActual !== 'localhost/licmarinaclaros/home/index.php') {
+$UrlActual = $_SERVER['REQUEST_URI'];
+if ($UrlActual !== '/licmarinaclaros/home/index.php') {
     if (!isset($_SESSION['logged_in'])) {
         header('Location: ../home/index.php');
         exit;

@@ -114,14 +114,17 @@
 .btn:hover .text {
   display: inline-block;
 }
-.modal-footer{
-  padding:0;
+.modal-footer {
+  padding: 0;
 }
 
-.borderMID{
+.borderMID {
   border-right: 1px solid #6d6d6d;
 }
 
-.imagen-perfil{
+.imagen-perfil {
   width: 75px;
+}
+#tabla_HC_paciente {
+  width: 100%;
 }

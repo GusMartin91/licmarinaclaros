@@ -88,7 +88,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
     <div class="tab-pane fade" id="historial_consulta-tab-pane" role="tabpanel" aria-labelledby="historial_consulta-tab" tabindex="0">
         <div class="container align-items-center justify-content-center mt-3">
             <div class="table">
-                <table id="tabla_HC_paciente" class="table table-bordered table-striped responsive nowrapx">
+                <table id="tabla_HC_paciente" style="width: 100%" class="table table-bordered table-striped responsive nowrapx">
                     <thead>
                         <tr>
                             <th>Nro de Consulta</th>
