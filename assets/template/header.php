@@ -12,7 +12,7 @@ if ($UrlActual !== 'localhost/licmarinaclaros/home/index.php') {
 if (isset($_SESSION['tiempoInicio']) && (time() - $_SESSION['tiempoInicio'] > 18000)) {
     session_unset();
     session_destroy();
-    header("Location: ../index.php?session_expired=true");
+    header("Location: ../home/index.php?session_expired=true");
     exit;
 }
 
@@ -81,10 +81,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         <li class="nav-item">
                             <a href="#" id="boton_registrarse" data-bs-toggle="modal" data-bs-target="#modal_registro" class="nav-link">| <i class="fa-solid fa-user-plus"></i> Registrarse</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" id="boton_iniciar_sesion" data-bs-toggle="modal" data-bs-target="#modal_login" class="nav-link">| <i class="fa-solid fa-key"></i> Iniciar sesion</a>
-                            <a href="#" id="boton_cerrar_sesion" class="nav-link" hidden>| <i class="fa-sharp fa-solid fa-lock"></i> Cerrar sesion</a>
-                        </li>
                         <li class="nav-item" id="div_boton_admin">
                             <?php if (isset($_SESSION['rol'])) { ?>
                                 <?php if ($_SESSION['rol'] == "admin") { ?>
@@ -93,6 +89,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                     <a href="../paciente/index.php" id="boton_paciente" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>
                                 <?php } ?>
                             <?php } ?>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="boton_iniciar_sesion" data-bs-toggle="modal" data-bs-target="#modal_login" class="nav-link">| <i class="fa-solid fa-key"></i> Iniciar sesion</a>
+                            <a href="#" id="boton_cerrar_sesion" class="nav-link" hidden>| <i class="fa-sharp fa-solid fa-lock"></i> Cerrar sesion</a>
                         </li>
                     </ul>
                 </div>

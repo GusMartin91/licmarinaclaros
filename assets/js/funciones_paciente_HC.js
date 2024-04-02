@@ -13,6 +13,7 @@ function tabla_HC_paciente() {
                     $('#tabla_HC_paciente tbody').empty();
                     for (let i = 0; i < response.length; i++) {
                         let datosBoton = {
+                            nro_consulta: i + 1,
                             id_consulta: response[i].id_consulta || '',
                             dni_paciente: response[i].dni_paciente || '',
                             nombre: response[i].nombre || '',
@@ -24,11 +25,12 @@ function tabla_HC_paciente() {
                             movimiento: response[i].movimiento || '',
                         }
                         let fila = '<tr>' +
+                            '<td>' + datosBoton.nro_consulta + '</td>' +
                             '<td>' + datosBoton.fecha_consulta + '</td>' +
                             '<td>' + datosBoton.peso + '</td>' +
                             '<td>' + datosBoton.observaciones_nutri + '</td>' +
                             '<td>' + datosBoton.observaciones_paciente +
-                            ` <button title="Editar" onclick="botonEditar_observaciones()" class="btn btn-sm btn-warning me-1" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
+                            ` <button title="Editar" onclick="botonEditar_observaciones(event)" class="btn btn-sm btn-warning" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
                             '</td>' +
                             '</tr>';
                         $('#tabla_HC_paciente tbody').append(fila);
@@ -130,16 +132,16 @@ function tabla_HC_paciente() {
                         columnDefs: [
                             {
                                 "sortable": false,
-                                "targets": [2,3]
+                                "targets": [3, 4]
                             }, {
-                                targets: [0],
+                                targets: [1],
                                 render: DataTable.render.datetime('DD/MM/YYYY'),
                             }, {
-                                width: "10px",
-                                targets: [1]
+                                width: "34%",
+                                targets: [3, 4]
                             }, {
-                                width: "35%",
-                                targets: [2,3]
+                                width: "8%",
+                                targets: [2]
                             }
                         ],
                     });
@@ -150,5 +152,86 @@ function tabla_HC_paciente() {
     });
 }
 
-function botonEditar_observaciones() {
+function botonEditar_observaciones(event) {
+    let button = event.currentTarget;
+    let datos = JSON.parse(button.getAttribute('data-bs-datos'));
+    let observacion_actual = datos.observaciones_paciente;
+    let id_consulta = datos.id_consulta;
+    Swal.fire({
+        title: '¡Atención!',
+        text: '¿Desea modificar o agregar alguna observacion por esta consulta?',
+        icon: 'info',
+        input: 'textarea',
+        inputValue: observacion_actual,
+        showCancelButton: true,
+        confirmButtonColor: '#22bb33',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let observacion_nueva = Swal.getInput().value
+            if (!observacion_nueva) {
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'La nueva observación no puede estar vacía.',
+                    icon: 'error',
+                    confirmButtonText: 'Confirmar',
+                });
+                return;
+            }
+            if (observacion_nueva == observacion_actual) {
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'La observación debe ser cambiada para ser actualizada.',
+                    icon: 'error',
+                    confirmButtonText: 'Confirmar',
+                });
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            const datos = {
+                id_consulta,
+                observacion_actual,
+                observacion_nueva,
+            };
+            xhr.open('POST', './backend_HC_paciente.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const respuesta = JSON.parse(xhr.responseText);
+                    if (respuesta.success) {
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: 'La observación se ha guardado correctamente.',
+                            icon: 'success',
+                            confirmButtonColor: '#22bb33',
+                            confirmButtonText: 'Confirmar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                tabla_HC_paciente();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: respuesta.error,
+                            icon: 'error',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Confirmar',
+                        });
+                    }
+                } else {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'Ocurrió un error al intentar guardar la observación.',
+                        icon: 'error',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Confirmar',
+                    });
+                }
+            };
+            xhr.send(JSON.stringify(datos));
+        }
+    });
 }

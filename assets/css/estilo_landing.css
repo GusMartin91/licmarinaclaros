@@ -117,3 +117,7 @@
 .modal-footer{
   padding:0;
 }
+
+.borderMID{
+  border-right: 1px solid #6d6d6d;
+}
