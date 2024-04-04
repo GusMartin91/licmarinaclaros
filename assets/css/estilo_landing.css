@@ -2,6 +2,30 @@
   margin: 0;
   padding: 0;
 }
+
+.nav-tabs .nav-link {
+  border-color: #cecece;
+  padding: 3px 10px 0px 10px;
+}
+.nav-tabs .nav-link:hover {
+  border: 1px solid #b6b6b6;
+  color: rgb(1, 1, 190);
+}
+.nav-tabs .nav-link.active {
+  border-top-color: #cecece;
+  border-left-color: #cecece;
+  border-right-color: #cecece;
+}
+#myTab {
+  background-color: #ececec;
+}
+.navbar {
+  background-color: #ececec;
+  padding: 0;
+}
+.nav-item a{
+  padding:0;
+}
 .navbar-nav .nav-link {
   color: #000;
 }
@@ -153,7 +177,6 @@
   overflow: hidden;
 }
 
-
 #fotoPaciente:hover #foto-paciente {
   opacity: 0.6;
 }
@@ -168,4 +191,7 @@
 
 #icon-camera {
   display: none;
+}
+.cards_gallery {
+  border: 2px solid gray;
 }

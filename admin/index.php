@@ -23,10 +23,10 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
         <button class="nav-link" id="historial_consulta-tab" onclick="tabla_HC()" data-bs-toggle="tab" data-bs-target="#historial_consulta-tab-pane" type="button" role="tab" aria-controls="historial_consulta-tab-pane" aria-selected="false">Historial de consultas</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+        <button class="nav-link" id="galeria-imagenes-tab" data-bs-toggle="tab" data-bs-target="#galeria-imagenes-tab-pane" type="button" role="tab" aria-controls="galeria-imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="otro-tab" data-bs-toggle="tab" data-bs-target="#otro-tab-pane" type="button" role="tab" aria-controls="otro-tab-pane" aria-selected="false">Otro</button>
+        <button class="nav-link" id="archivos-tab" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -77,10 +77,10 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+    <div class="tab-pane fade" id="galeria-imagenes-tab-pane" role="tabpanel" aria-labelledby="galeria-imagenes-tab" tabindex="0">
 
     </div>
-    <div class="tab-pane fade" id="otro-tab-pane" role="tabpanel" aria-labelledby="otro-tab" tabindex="0">
+    <div class="tab-pane fade" id="archivos-tab-pane" role="tabpanel" aria-labelledby="archivos-tab" tabindex="0">
 
     </div>
 </div>

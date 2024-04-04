@@ -1,4 +1,4 @@
-const boton_cerrar_sesion = document.getElementById('boton_cerrar_sesion')
+let boton_cerrar_sesion = document.getElementById('boton_cerrar_sesion')
 const boton_iniciar_sesion = document.getElementById('boton_iniciar_sesion');
 const boton_registrarse = document.getElementById('boton_registrarse');
 const fotoPaciente = document.getElementById('fotoPaciente');
@@ -24,11 +24,9 @@ function checkSession() {
         .then(response => response.json())
         .then(data => {
             if (data.loggedIn) {
-                boton_cerrar_sesion.hidden = false
                 boton_iniciar_sesion.hidden = true
                 boton_registrarse.hidden = true
             } else {
-                boton_cerrar_sesion.hidden = true
                 if (boton_admin) {
                     boton_admin.hidden = true
                 }
@@ -44,8 +42,12 @@ function checkSession() {
         });
 }
 checkSession()
-
-boton_cerrar_sesion.addEventListener('click', () => {
+if (boton_cerrar_sesion) {
+    boton_cerrar_sesion.addEventListener('click', () => {
+        cerrar_sesion()
+    });
+}
+function cerrar_sesion() {
     fetch('../login/logout.php')
         .then(() => {
             Swal.fire({
@@ -58,11 +60,10 @@ boton_cerrar_sesion.addEventListener('click', () => {
             }).then(() => {
                 window.location.href = "index.php";
             });
-            boton_cerrar_sesion.hidden = true
             if (boton_admin) {
                 boton_admin.hidden = true
             }
             boton_registrarse.hidden = false
             boton_iniciar_sesion.hidden = false
         });
-});
+}

@@ -15,10 +15,10 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
         <button class="nav-link" id="historial_consulta-tab" onclick="tabla_HC_paciente()" data-bs-toggle="tab" data-bs-target="#historial_consulta-tab-pane" type="button" role="tab" aria-controls="historial_consulta-tab-pane" aria-selected="false">Historial de consultas</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+        <button class="nav-link" id="galeria_imagenes-tab" data-bs-toggle="tab" data-bs-target="#galeria_imagenes-tab-pane" type="button" role="tab" aria-controls="galeria_imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="otro-tab" data-bs-toggle="tab" data-bs-target="#otro-tab-pane" type="button" role="tab" aria-controls="otro-tab-pane" aria-selected="false">Otro</button>
+        <button class="nav-link" id="archivos-tab" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -108,10 +108,47 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-
+    <div class="tab-pane fade" id="galeria_imagenes-tab-pane" role="tabpanel" aria-labelledby="galeria_imagenes-tab" tabindex="0">
+        <div class="container mt-3 mb-3">
+            <div class="row mb-2 cards_gallery">
+                <div class="col-md-4">
+                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Título de la imagen</h5>
+                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 cards_gallery">
+                <div class="col-md-4">
+                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Título de la imagen</h5>
+                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2 cards_gallery">
+                <div class="col-md-4">
+                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Título de la imagen</h5>
+                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="tab-pane fade" id="otro-tab-pane" role="tabpanel" aria-labelledby="otro-tab" tabindex="0">
+    <div class="tab-pane fade" id="archivos-tab-pane" role="tabpanel" aria-labelledby="archivos-tab" tabindex="0">
 
     </div>
 </div>
@@ -123,6 +160,7 @@ require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_paciente.js"></script>
 <script src="../assets/js/funciones_paciente_HC.js"></script>
+<script src="../assets/js/funciones_paciente_galeria.js"></script>
 <script>
     const irAPestana = <?php echo json_encode($ir_a_pestana); ?>;
     if (irAPestana == 'HC') {

@@ -26,11 +26,10 @@ form_login.addEventListener('submit', function (event) {
         if (respuesta.success) {
             boton_iniciar_sesion.hidden = true
             boton_registrarse.hidden = true
-            boton_cerrar_sesion.hidden = false
             if (respuesta.rol == 'admin') {
-                div_boton_admin.innerHTML = '<a href="../admin/index.php" id="boton_admin" class="nav-link">| <i class="fa-solid fa-gear"></i> Panel Admin</a><a href="../paciente/index.php" id="boton_paciente_a" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>'
+                div_boton_admin.innerHTML = `<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> ${respuesta.name}</a><ul class="dropdown-menu"><li><a class="dropdown-item nav-link" href="../admin/index.php" id="boton_admin" class="nav-link"><i class="fa-solid fa-gear"></i> Panel Admin</a></li><li><a class="dropdown-item nav-link" href="../paciente/index.php" id="boton_paciente_a" class="nav-link"><i class="fa-solid fa-gear"></i> Panel Paciente</a></li><li><hr class="dropdown-divider"></li><li><a href="#" id="boton_cerrar_sesion" onclick="cerrar_sesion()" class="nav-link"><i class="fa-sharp fa-solid fa-lock"></i> Cerrar sesion</a></li>`
             } else if (respuesta.rol == 'paciente') {
-                div_boton_admin.innerHTML = '<a href="../paciente/index.php" id="boton_paciente_p" class="nav-link">| <i class="fa-solid fa-user"></i> Panel Paciente</a>'
+                div_boton_admin.innerHTML = `<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> ${respuesta.name}</a><ul class="dropdown-menu"><li><a class="dropdown-item nav-link" href="../paciente/index.php" id="boton_paciente_p" class="nav-link"><i class="fa-solid fa-gear"></i> Panel Paciente</a></li><li><hr class="dropdown-divider"></li><li><a href="#" id="boton_cerrar_sesion" onclick="cerrar_sesion()" class="nav-link"><i class="fa-sharp fa-solid fa-lock"></i> Cerrar sesion</a></li>`
             }
             boton_cerrar.click()
             Swal.fire({

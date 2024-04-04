@@ -1,7 +1,7 @@
 <footer class="bg-light text-center py-4">
   <div class="container">
     <div class="col">
-      <h5><a href="https://www.instagram.com/esaesminutri" class="social-icon">Seguime en <b><i class="iconoInsta fa-brands fa-instagram fa-bounce fa-xl"></i> Instagram</b> para ver las ultimas novedades.</a></h5>
+      <h5><a href="https://www.instagram.com/esaesminutri" target="_blank" class="social-icon">Seguime en <b><i class="iconoInsta fa-brands fa-instagram fa-bounce fa-xl"></i> Instagram</b> para ver las ultimas novedades.</a></h5>
     </div>
     <div class="row mt-3">
       <div class="col">
