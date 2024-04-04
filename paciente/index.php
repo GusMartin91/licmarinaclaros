@@ -15,7 +15,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
         <button class="nav-link" id="historial_consulta-tab" onclick="tabla_HC_paciente()" data-bs-toggle="tab" data-bs-target="#historial_consulta-tab-pane" type="button" role="tab" aria-controls="historial_consulta-tab-pane" aria-selected="false">Historial de consultas</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="galeria_imagenes-tab" data-bs-toggle="tab" data-bs-target="#galeria_imagenes-tab-pane" type="button" role="tab" aria-controls="galeria_imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
+        <button class="nav-link" id="galeria_imagenes-tab" onclick="galeria_paciente()" data-bs-toggle="tab" data-bs-target="#galeria_imagenes-tab-pane" type="button" role="tab" aria-controls="galeria_imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="archivos-tab" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
@@ -23,8 +23,8 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="pacientes-tab-pane" role="tabpanel" aria-labelledby="pacientes-tab" tabindex="0">
-        <div class="container fluid">
-            <h2 class="text-center mt-3 mb-2" id="titulo_ficha"></h2>
+        <div class="container">
+            <h2 class="text-center mt-3 m-0 mb-2" id="titulo_ficha"></h2>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <div class="card">
@@ -109,47 +109,13 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
         </div>
     </div>
     <div class="tab-pane fade" id="galeria_imagenes-tab-pane" role="tabpanel" aria-labelledby="galeria_imagenes-tab" tabindex="0">
-        <div class="container mt-3 mb-3">
-            <div class="row mb-2 cards_gallery">
-                <div class="col-md-4">
-                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Título de la imagen</h5>
-                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2 cards_gallery">
-                <div class="col-md-4">
-                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Título de la imagen</h5>
-                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2 cards_gallery">
-                <div class="col-md-4">
-                    <img src="../assets/img/gallery/prueba.jpg" class="img-fluid" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Título de la imagen</h5>
-                        <p class="card-text">Descripción de la imagen. Puedes agregar aquí más información sobre la imagen, como la fecha en que fue tomada, el autor, el lugar donde fue tomada, etc.</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
-                    </div>
-                </div>
+        <div class="container mt-4">
+            <div class="row justify-content-center gap-4" id="contenedor_galeria">
+                
             </div>
         </div>
     </div>
     <div class="tab-pane fade" id="archivos-tab-pane" role="tabpanel" aria-labelledby="archivos-tab" tabindex="0">
-
     </div>
 </div>
 
