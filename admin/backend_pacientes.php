@@ -100,7 +100,7 @@ switch ($datos['movimiento']) {
         break;
 }
 $dni = '';
-if ($sqlUpdate || $sqlDelete) {
+if (isset($sqlUpdate) || isset($sqlDelete)) {
     $consulta = "SELECT * FROM v_pacientes WHERE id_paciente = '{$datos['id_paciente']}'";
     $resultConsulta = mysqli_query($con, $consulta);
     if ($resultConsulta) {
@@ -110,21 +110,21 @@ if ($sqlUpdate || $sqlDelete) {
     }
 }
 
-if ($sqlInsert || $sqlUpdate || $sqlDelete) {
-    if ($sqlInsert) {
+if (isset($sqlInsert) || isset($sqlUpdate) || isset($sqlDelete)) {
+    if (isset($sqlInsert)) {
         mysqli_query($con, $sqlInsert);
         $dni = "{$datos['dni']}";
     }
-    if ($sqlUpdate) {
+    if (isset($sqlUpdate)) {
         mysqli_query($con, $sqlUpdate);
     }
-    if ($sqlDelete) {
+    if (isset($sqlDelete)) {
         mysqli_query($con, $sqlDelete);
     }
     $id_paciente = "{$datos['id_paciente']}" != null ? "{$datos['id_paciente']}" : obtenerID();
     $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, aplicativo, ruta_aplicativo, ultima_actualizacion, usuario, ip_cliente, sistema_operativo, browser) VALUES ('$tipo_auditoria', '$id_paciente', '$dni', '$aplicativo', '$ruta_aplicativo', '$actualizacionString', '$usuario', '$ip_cliente', '$sistema_operativo', '$navegador')";
     mysqli_query($con, $sqlAudita);
-    if ($sqlInsert) {
+    if (isset($sqlInsert)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Registro Exitoso',
@@ -132,7 +132,7 @@ if ($sqlInsert || $sqlUpdate || $sqlDelete) {
             'confirmButtonText' => 'OK',
         ];
     }
-    if ($sqlUpdate) {
+    if (isset($sqlUpdate)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Actualizacion Exitosa',
@@ -140,7 +140,7 @@ if ($sqlInsert || $sqlUpdate || $sqlDelete) {
             'confirmButtonText' => 'OK',
         ];
     }
-    if ($sqlDelete) {
+    if (isset($sqlDelete)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Borrado Exitoso',

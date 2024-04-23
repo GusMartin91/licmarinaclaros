@@ -94,7 +94,7 @@ switch ($datos['movimiento_HC']) {
         break;
 }
 $dni = '';
-if ($sqlUpdate || $sqlDelete) {
+if (isset($sqlUpdate) || isset($sqlDelete)) {
     $consulta = "SELECT * FROM v_historial_consultas WHERE id_consulta = '{$datos['id_consulta']}'";
     $resultConsulta = mysqli_query($con, $consulta);
     if ($resultConsulta) {
@@ -104,22 +104,22 @@ if ($sqlUpdate || $sqlDelete) {
     }
 }
 
-if ($sqlInsert || $sqlUpdate || $sqlDelete) {
-    if ($sqlInsert) {
+if (isset($sqlInsert) || isset($sqlUpdate) || isset($sqlDelete)) {
+    if (isset($sqlInsert)) {
         mysqli_query($con, $sqlInsert);
         $dni = "{$datos['dni_HC']}";
     }
-    if ($sqlUpdate) {
+    if (isset($sqlUpdate)) {
         mysqli_query($con, $sqlUpdate);
     }
-    if ($sqlDelete) {
+    if (isset($sqlDelete)) {
         mysqli_query($con, $sqlDelete);
     }
     $id_consulta = "{$datos['id_consulta']}" != null ? "{$datos['id_consulta']}" : obtenerID();
     $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, aplicativo, ruta_aplicativo, ultima_actualizacion, usuario, ip_cliente, sistema_operativo, browser) VALUES ('$tipo_auditoria', '$id_consulta', '$dni', '$aplicativo', '$ruta_aplicativo', '$actualizacionString', '$usuario', '$ip_cliente', '$sistema_operativo', '$navegador')";
     mysqli_query($con, $sqlAudita);
     $_SESSION['pestana'] = 'HC';
-    if ($sqlInsert) {
+    if (isset($sqlInsert)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Registro de consulta Exitoso',
@@ -127,7 +127,7 @@ if ($sqlInsert || $sqlUpdate || $sqlDelete) {
             'confirmButtonText' => 'OK',
         ];
     }
-    if ($sqlUpdate) {
+    if (isset($sqlUpdate)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Actualizacion Exitosa',
@@ -135,7 +135,7 @@ if ($sqlInsert || $sqlUpdate || $sqlDelete) {
             'confirmButtonText' => 'OK',
         ];
     }
-    if ($sqlDelete) {
+    if (isset($sqlDelete)) {
         $_SESSION['swal_message'] = [
             'icon' => 'success',
             'title' => 'Borrado Exitoso',
