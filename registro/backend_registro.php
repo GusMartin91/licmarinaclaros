@@ -6,8 +6,9 @@ session_start();
 function obtenerID()
 {
     global $con;
-    return mysqli_insert_id($con);
+    return $con->lastInsertId();
 }
+
 function obtenerIP()
 {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -58,13 +59,33 @@ foreach ($camposFormulario as $campo) {
 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 $rseguridad = password_hash($_POST['rseguridad'], PASSWORD_BCRYPT);
 $tipo_auditoria = 'Registro';
-$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, fecha_proxima_consulta, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
-        VALUES ('{$datos['dni']}', '{$datos['observaciones']}', '{$datos['nombre']}', '{$datos['apellido']}', " . ($datos['fecha_nacimiento'] ? "'{$datos['fecha_nacimiento']}'" : 'NULL') . ", " . ($datos['fecha_proxima_consulta'] ? "'{$datos['fecha_proxima_consulta']}'" : 'NULL') . ", '{$datos['id_genero']}', '{$datos['telefono']}', '{$datos['email']}', '{$datos['peso']}', '{$datos['altura']}', '$password', '{$datos['pseguridad']}', '$rseguridad')";
 
-if (mysqli_query($con, $sqlInsert)) {
+$sqlInsert = "INSERT INTO pacientes (dni, observaciones, nombre, apellido, fecha_nacimiento, fecha_proxima_consulta, id_genero, telefono, email, peso, altura, password, pseguridad, rseguridad) 
+        VALUES (:dni, :observaciones, :nombre, :apellido, :fecha_nacimiento, :fecha_proxima_consulta, :id_genero, :telefono, :email, :peso, :altura, :password, :pseguridad, :rseguridad)";
+
+$stmtInsert = $con->prepare($sqlInsert);
+$stmtInsert->bindParam(":dni", $datos['dni']);
+$stmtInsert->bindParam(":observaciones", $datos['observaciones']);
+$stmtInsert->bindParam(":nombre", $datos['nombre']);
+$stmtInsert->bindParam(":apellido", $datos['apellido']);
+$stmtInsert->bindParam(":fecha_nacimiento", $datos['fecha_nacimiento'] ? $datos['fecha_nacimiento'] : null);
+$stmtInsert->bindParam(":fecha_proxima_consulta", $datos['fecha_proxima_consulta'] ? $datos['fecha_proxima_consulta'] : null);
+$stmtInsert->bindParam(":id_genero", $datos['id_genero']);
+$stmtInsert->bindParam(":telefono", $datos['telefono']);
+$stmtInsert->bindParam(":email", $datos['email']);
+$stmtInsert->bindParam(":peso", $datos['peso']);
+$stmtInsert->bindParam(":altura", $datos['altura']);
+$stmtInsert->bindParam(":password", $password);
+$stmtInsert->bindParam(":pseguridad", $datos['pseguridad']);
+$stmtInsert->bindParam(":rseguridad", $rseguridad);
+
+if ($stmtInsert->execute()) {
     $id_paciente = obtenerID();
+
     $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, ip_cliente, sistema_operativo, browser) VALUES ('$tipo_auditoria', '$id_paciente', '{$datos['dni']}', '$ip_cliente', '$sistema_operativo', '$navegador')";
-    mysqli_query($con, $sqlAudita);
+    $stmtAudita = $con->prepare($sqlAudita);
+    $stmtAudita->execute();
+
     $_SESSION['swal_message'] = [
         'icon' => 'success',
         'title' => 'Registro Exitoso',
@@ -73,5 +94,7 @@ if (mysqli_query($con, $sqlInsert)) {
     ];
     header('Location: ../home/index.php');
 } else {
-    echo "Error al guardar los datos: " . mysqli_error($con);
+    echo "Error al guardar los datos: " . $stmtInsert->errorInfo()[2];
 }
+
+$con = null;

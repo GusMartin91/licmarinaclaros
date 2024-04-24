@@ -10,8 +10,22 @@ $email_paciente;
 if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
   $fecha_proxima_consulta = $_GET['event_start_time'];
   $email_paciente = $_GET['invitee_email'];
-  $sqlComprobarEmail = "SELECT * FROM pacientes WHERE email = '$email_paciente'";
-  $resultado = mysqli_query($con, $sqlComprobarEmail);
+
+  try {
+    if (!$con) {
+      throw new PDOException('No database connection established.');
+    }
+
+    $sqlComprobarEmail = "SELECT * FROM pacientes WHERE email = :email";
+    $stmt = $con->prepare($sqlComprobarEmail);
+    $stmt->bindParam(":email", $email_paciente);
+    $stmt->execute();
+
+    $paciente = $stmt->fetch();
+    $emailExiste = !empty($paciente);
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+  }
 }
 
 ?>
@@ -75,27 +89,31 @@ require '../assets/template/footer.php';
 <script src="../assets/js/funciones_login_recupero.js"></script>
 <script src="../assets/js/funciones_registro.js"></script>
 <?php
-if (isset($resultado) && mysqli_num_rows($resultado) == 0) {
+if (isset($paciente) && empty($paciente)) {
   echo "<script>
-  Swal.fire({
-    icon: 'warning',
-    title: 'Aun no te registraste.',
-    text: 'Clickea en Registrarme para poder ver tus historiales de consultas, tus planes, poder subir tus fotos a tu ficha personal, etc.',
-    showCancelButton: false,
-    showConfirmButton: true,
-    confirmButtonText: 'Registrarme'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      boton_registrarse.click()
-    }
-  });
-  </script>";
-} elseif (isset($resultado) && mysqli_num_rows($resultado) > 1) {
-  $sqlNuevaConsulta = "UPDATE pacientes SET fecha_proxima_consulta = '$fecha_proxima_consulta' WHERE email = '$email_paciente'";
-  mysqli_query($con, $sqlNuevaConsulta);
-  if (mysqli_affected_rows($con) > 0) {
-    echo "<script>
     Swal.fire({
+      icon: 'warning',
+      title: 'Aun no te registraste.',
+      text: 'Clickea en Registrarme para poder ver tus historiales de consultas, tus planes, poder subir tus fotos a tu ficha personal, etc.',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButton: 'Registrarme'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        boton_registrarse.click();
+      }
+    });
+  </script>";
+} elseif (isset($paciente) && $paciente !== false) {
+  $sqlNuevaConsulta = "UPDATE pacientes SET fecha_proxima_consulta = :fecha_proxima_consulta WHERE email = :email";
+  $stmt = $conn->prepare($sqlNuevaConsulta);
+  $stmt->bindParam(":fecha_proxima_consulta", $fecha_proxima_consulta);
+  $stmt->bindParam(":email", $email_paciente);
+  $stmt->execute();
+
+  if ($stmt->rowCount() > 0) {
+    echo "<script>
+      Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
         text: 'La próxima consulta se ha actualizado correctamente.',

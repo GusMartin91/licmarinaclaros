@@ -1,11 +1,14 @@
 <?php
 
-$usuario = "nutrihot";
+$host = "localhost";
+$db = "licmarinaclaros";
+$user = "nutrihot";
 $password = "nutrihot915";
-$servidor = "localhost";
-$basededatos = "licmarinaclaros";
 
-$con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
-mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
-$db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
-?>
+try {
+    $con = new PDO("mysql:host=$host;dbname=$db", $user, $password);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage() . "\n";
+    die();
+}
