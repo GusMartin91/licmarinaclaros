@@ -44,17 +44,20 @@ $navegador = obtenerNavegador($userAgent);
 $dni_login = $_POST['dni_login'];
 $password_login = $_POST['password_login'];
 
-$sqlVerificar = "SELECT * FROM pacientes WHERE dni = '$dni_login'";
-$result = mysqli_query($con, $sqlVerificar);
+$sqlVerificar = "SELECT * FROM pacientes WHERE dni = :dni";
+$stmtVerificar = $con->prepare($sqlVerificar);
+$stmtVerificar->bindParam(":dni", $dni_login);
 
-if (mysqli_num_rows($result) === 0) {
+$stmtVerificar->execute();
+
+if ($stmtVerificar->rowCount() === 0) {
     echo json_encode([
         'success' => false,
         'message' => 'Las credenciales proporcionadas son invalidas.'
     ]);
     exit;
 } else {
-    $pacienteBD = mysqli_fetch_assoc($result);
+    $pacienteBD = $stmtVerificar->fetch(PDO::FETCH_ASSOC);
 
     if (password_verify($password_login, $pacienteBD['password'])) {
         $_SESSION['id_paciente'] = $pacienteBD['id_paciente'];
@@ -64,9 +67,17 @@ if (mysqli_num_rows($result) === 0) {
         $_SESSION['rol'] = $pacienteBD['rol'];
         $_SESSION['logged_in'] = true;
         $_SESSION['tiempoInicio'] = time();
+
         $sqlInsert = "INSERT INTO login (dni, ip_cliente, sistema_operativo, navegador) 
-        VALUES ('$dni_login', '$ip_cliente', '$sistema_operativo', '$navegador')";
-        mysqli_query($con, $sqlInsert);
+                VALUES (:dni, :ip_cliente, :sistema_operativo, :navegador)";
+        $stmtInsert = $con->prepare($sqlInsert);
+        $stmtInsert->bindParam(":dni", $dni_login);
+        $stmtInsert->bindParam(":ip_cliente", $ip_cliente);
+        $stmtInsert->bindParam(":sistema_operativo", $sistema_operativo);
+        $stmtInsert->bindParam(":navegador", $navegador);
+
+        $stmtInsert->execute();
+
         echo json_encode([
             'success' => true,
             'name' => $pacienteBD['nombre'] . ' ' . $pacienteBD['apellido'],
@@ -82,3 +93,5 @@ if (mysqli_num_rows($result) === 0) {
         exit;
     }
 }
+
+$con = null;

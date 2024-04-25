@@ -1,5 +1,4 @@
 <?php
-
 include '../assets/conexion/conexion.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -12,17 +11,21 @@ $new_pass = isset($data['new_pass']) ? $data['new_pass'] : "";
 $respuesta = [];
 
 // Verificar DNI
-$sqlDni = "SELECT * FROM pacientes WHERE dni = '$dni'";
-$resultDni = mysqli_query($con, $sqlDni);
-$respuesta['dniExiste'] = mysqli_num_rows($resultDni) > 0;
+$sqlDni = "SELECT * FROM pacientes WHERE dni = :dni";
+$stmtDni = $con->prepare($sqlDni);
+$stmtDni->bindParam(":dni", $dni);
+$stmtDni->execute();
+$respuesta['dniExiste'] = $stmtDni->rowCount() > 0;
 
 // Verificar email
 if ($respuesta['dniExiste'] && $email !== "") {
-    $sqlEmail = "SELECT * FROM pacientes WHERE email = '$email'";
-    $resultEmail = mysqli_query($con, $sqlEmail);
+    $sqlEmail = "SELECT * FROM pacientes WHERE email = :email";
+    $stmtEmail = $con->prepare($sqlEmail);
+    $stmtEmail->bindParam(":email", $email);
+    $stmtEmail->execute();
 
-    if (mysqli_num_rows($resultEmail) > 0) {
-        $paciente = mysqli_fetch_assoc($resultEmail);
+    if ($stmtEmail->rowCount() > 0) {
+        $paciente = $stmtEmail->fetch(PDO::FETCH_ASSOC);
         $respuesta['emailExiste'] = true;
         $respuesta['pseguridad'] = $paciente['pseguridad'];
     } else {
@@ -32,11 +35,14 @@ if ($respuesta['dniExiste'] && $email !== "") {
 
 // Verificar rseguridad
 if ($respuesta['dniExiste'] && $rseguridad !== "") {
-    $sqlRespuesta = "SELECT * FROM pacientes WHERE dni = '$dni' AND email = '$email'";
-    $resultRespuesta = mysqli_query($con, $sqlRespuesta);
+    $sqlRespuesta = "SELECT * FROM pacientes WHERE dni = :dni AND email = :email";
+    $stmtRespuesta = $con->prepare($sqlRespuesta);
+    $stmtRespuesta->bindParam(":dni", $dni);
+    $stmtRespuesta->bindParam(":email", $email);
+    $stmtRespuesta->execute();
 
-    if (mysqli_num_rows($resultRespuesta) > 0) {
-        $paciente = mysqli_fetch_assoc($resultRespuesta);
+    if ($stmtRespuesta->rowCount() > 0) {
+        $paciente = $stmtRespuesta->fetch(PDO::FETCH_ASSOC);
         $rseguridadBD = $paciente['rseguridad'];
         if (password_verify($rseguridad, $rseguridadBD)) {
             $respuesta['rseguridadValida'] = true;
@@ -48,13 +54,17 @@ if ($respuesta['dniExiste'] && $rseguridad !== "") {
     }
 }
 
-//actualizar contraseña
+// Actualizar contraseña
 if ($new_pass !== "") {
     $new_pass_hashed = password_hash($new_pass, PASSWORD_BCRYPT);
-    $sqlInsert = "UPDATE pacientes SET password = '$new_pass_hashed' WHERE dni = '$dni'";
-    mysqli_query($con, $sqlInsert);
-    $respuesta['cambioExitoso'] = true;
+    $sqlUpdate = "UPDATE pacientes SET password = :new_pass WHERE dni = :dni";
+    $stmtUpdate = $con->prepare($sqlUpdate);
+    $stmtUpdate->bindParam(":new_pass", $new_pass_hashed);
+    $stmtUpdate->bindParam(":dni", $dni);
+    $stmtUpdate->execute();
+    $respuesta['cambioExitoso'] = $stmtUpdate->rowCount() > 0;
 }
 
+$con = null;
 
 echo json_encode($respuesta);
