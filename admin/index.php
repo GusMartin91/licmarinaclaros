@@ -11,6 +11,7 @@ if (isset($_SESSION['swal_message'])) {
 $ir_a_pestana = '';
 if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
     $ir_a_pestana = 'HC';
+    $_SESSION['pestana']='';
 }
 ?>
 <title>Panel de Admin</title>

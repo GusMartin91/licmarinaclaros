@@ -8,6 +8,10 @@
             <div class="modal-body">
                 <form action="./backend_HC.php" id="form_HC" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="movimiento_HC" id="movimiento_HC">
+                    <input type="hidden" name="id_consulta" id="id_consulta">
+                    <input type="hidden" name="peso_HC_actual" id="peso_HC_actual">
+                    <input type="hidden" name="fecha_consulta_HC_actual" id="fecha_consulta_HC_actual">
+                    <input type="hidden" name="observaciones_HC_actual" id="observaciones_HC_actual">
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-6 mb-2">
                             <label for="dni_HC" class="form-label">Ingrese DNI del Paciente:</label>

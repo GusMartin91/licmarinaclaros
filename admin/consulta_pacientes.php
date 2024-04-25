@@ -3,13 +3,15 @@ include '../assets/conexion/conexion.php';
 
 session_start();
 
-$consulta = "SELECT * FROM v_pacientes";
+$sql = "SELECT * FROM v_pacientes";
 
-$resultConsulta = mysqli_query($con, $consulta);
-$array_pacientes = array();
+$stmt = $con->prepare($sql);
+$stmt->execute();
 
-while ($fila = mysqli_fetch_assoc($resultConsulta)) {
-    $array_pacientes[] = $fila;
+$arrayPacientes = array();
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $arrayPacientes[] = $row;
 }
 
-echo json_encode($array_pacientes, JSON_UNESCAPED_UNICODE);
+echo json_encode($arrayPacientes, JSON_UNESCAPED_UNICODE);

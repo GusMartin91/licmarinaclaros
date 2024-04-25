@@ -166,6 +166,7 @@ function botonNuevo_HC() {
         modal_HCLabel.innerText = "Ingresar nueva consulta"
         submit_HC.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Ingresar'
         modal_HC.querySelector('.modal-body #movimiento_HC').value = 'A'
+        modal_HC.querySelector('.modal-body #dni_HC').disabled = false
         modal_HC.removeEventListener('shown.bs.modal', onModalShown);
     }
     modal_HC.addEventListener('shown.bs.modal', onModalShown);
@@ -178,12 +179,14 @@ function botonEditar_HC() {
         let button = event.relatedTarget
         let datos = JSON.parse(button.getAttribute('data-bs-datos'));
         modal_HC.querySelector('.modal-body #id_consulta').value = datos.id_consulta
-        modal_HC.querySelector('.modal-body #fecha_proxima_consulta').value = datos.fecha_proxima_consulta
-        modal_HC.querySelector('.modal-body #peso').value = datos.peso
-        modal_HC.querySelector('.modal-body #observaciones').value = datos.observaciones_nutri
-        modal_HC.querySelector('.modal-body #fecha_proxima_consulta_actual').value = datos.fecha_proxima_consulta
-        modal_HC.querySelector('.modal-body #peso_actual').value = datos.peso
-        modal_HC.querySelector('.modal-body #observaciones_actual').value = datos.observaciones_nutri
+        modal_HC.querySelector('.modal-body #peso_HC').value = datos.peso
+        modal_HC.querySelector('.modal-body #dni_HC').value = datos.dni_paciente
+        modal_HC.querySelector('.modal-body #dni_HC').disabled = true
+        modal_HC.querySelector('.modal-body #fecha_consulta_HC').value = datos.fecha_consulta
+        modal_HC.querySelector('.modal-body #observaciones_HC').value = datos.observaciones_nutri
+        modal_HC.querySelector('.modal-body #fecha_consulta_HC_actual').value = datos.fecha_consulta
+        modal_HC.querySelector('.modal-body #peso_HC_actual').value = datos.peso
+        modal_HC.querySelector('.modal-body #observaciones_HC_actual').value = datos.observaciones_nutri
         modal_HC.removeEventListener('shown.bs.modal', onModalShown);
     }
     modal_HC.addEventListener('shown.bs.modal', onModalShown);

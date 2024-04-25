@@ -1,6 +1,7 @@
 <?php
 $sqlGeneros = "SELECT * FROM generos";
-$generos = $con->query($sqlGeneros);
+$stmtGenero = $con->prepare($sqlGeneros);
+$stmtGenero->execute();
 ?>
 <div class="modal fade" id="modal_paciente" tabindex="-1" aria-labelledby="modal_pacienteLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -40,10 +41,10 @@ $generos = $con->query($sqlGeneros);
                         <div class="col-xs-12 col-sm-4 mb-2">
                             <label for="id_genero" class="form-label">Genero:</label>
                             <select name="id_genero" id="id_genero" class="form-select">
-                                <option value="" selected disaled hidden>Seleccionar...</option>
-                                <?php while ($row_genero = $generos->fetch_assoc()) { ?>
-                                    <option value="<?php echo $row_genero["id_genero"]; ?>"><?= $row_genero["desc_genero"] ?></option>
-                                <?php }; ?>
+                                <option value="" selected disabled hidden>Seleccionar...</option>
+                                <?php while ($row_genero = $stmtGenero->fetch(PDO::FETCH_ASSOC)) : ?>
+                                    <option value="<?= $row_genero['id_genero'] ?>"><?= $row_genero['desc_genero'] ?></option>
+                                <?php endwhile; ?>
                             </select>
                         </div>
                         <div class="col-xs-12 col-sm-5 mb-2">

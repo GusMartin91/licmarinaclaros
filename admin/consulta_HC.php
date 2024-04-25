@@ -3,13 +3,15 @@ include '../assets/conexion/conexion.php';
 
 session_start();
 
-$consulta = "SELECT * FROM v_historial_consulta";
+$sql = "SELECT * FROM v_historial_consulta";
 
-$resultConsulta = mysqli_query($con, $consulta);
-$array_HC = array();
+$stmt = $con->prepare($sql);
+$stmt->execute();
 
-while ($fila = mysqli_fetch_assoc($resultConsulta)) {
-    $array_HC[] = $fila;
+$arrayHC = array();
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $arrayHC[] = $row;
 }
 
-echo json_encode($array_HC, JSON_UNESCAPED_UNICODE);
+echo json_encode($arrayHC, JSON_UNESCAPED_UNICODE);
