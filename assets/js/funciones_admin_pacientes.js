@@ -65,8 +65,30 @@ function tabla_pacientes() {
                         observaciones: response[i].observaciones || '',
                         movimiento: response[i].movimiento || '',
                     }
+                    let fotoPerfilSrc = '';
+                    if (datosBoton.foto_perfil !== '') {
+                        $.ajax({
+                            url: './check_image.php',
+                            type: 'POST',
+                            data: { image_path: datosBoton.foto_perfil },
+                            async: false,
+                            success: function (response) {
+                                if (response.exists) {
+                                    fotoPerfilSrc = '../assets/' + datosBoton.foto_perfil;
+                                } else {
+                                    fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                                fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                            }
+                        });
+                    } else {
+                        fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                    }
                     let fila = '<tr>' +
-                        '<td><img src="../assets/' + datosBoton.foto_perfil + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil"></td>' +
+                        '<td><img src="' + fotoPerfilSrc + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil"></td>' +
                         '<td>' + datosBoton.apellido + '</td>' +
                         '<td>' + datosBoton.nombre + '</td>' +
                         '<td>' + datosBoton.desc_genero + '</td>' +

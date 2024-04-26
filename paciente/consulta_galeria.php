@@ -10,19 +10,18 @@ if (empty($dni_paciente)) {
     exit;
 }
 
-$consulta = "SELECT * FROM galeria_paciente WHERE dni_paciente = $dni_paciente";
+try {
+    $consulta = "SELECT * FROM galeria_paciente WHERE dni_paciente = :dni_paciente";
+    $statement = $con->prepare($consulta);
+    $statement->bindParam(':dni_paciente', $dni_paciente);
+    $statement->execute();
 
-$resultConsulta = mysqli_query($con, $consulta);
-
-$array_HC = array();
-if (mysqli_num_rows($resultConsulta) > 0) {
-    while ($fila = mysqli_fetch_assoc($resultConsulta)) {
-        $array_HC[] = $fila;
+    $array_HC = $statement->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($array_HC, JSON_UNESCAPED_UNICODE);
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'error' => 'Error al obtener la galería del paciente: ' . $e->getMessage()]);
+} finally {
+    if ($con !== null) {
+        $con = null;
     }
-} else {
-    $array_HC = [];
 }
-
-echo json_encode($array_HC, JSON_UNESCAPED_UNICODE);
-
-mysqli_close($con);

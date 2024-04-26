@@ -54,9 +54,25 @@ function fichaPaciente() {
                     .catch(error => {
                         console.error(error);
                     });
+                const fotoPerfil = paciente.foto_perfil || '';
+                const fotoPerfilUrl = "../assets/" + fotoPerfil;
+                const defaultImageUrl = "../assets/img/profiles/default_profile.png";
 
-                document.getElementById('foto-paciente').src = "../assets/" + paciente.foto_perfil;
-                pacientes_tab_pane.querySelector('#fotoPaciente img').alt = `Foto de ${paciente.apellido}, ${paciente.nombre}`;
+                async function setProfileImage(fotoPerfilUrl) {
+                    try {
+                        let exists = await checkImage(fotoPerfilUrl);
+                        if (!exists) {
+                            document.getElementById('foto-paciente').src = defaultImageUrl;
+                            document.querySelector('#fotoPaciente img').alt = `Foto por defecto`;
+                        } else {
+                            document.getElementById('foto-paciente').src = fotoPerfilUrl;
+                            document.querySelector('#fotoPaciente img').alt = `Foto de ${paciente.apellido}, ${paciente.nombre}`;
+                        }
+                    } catch (error) {
+                        console.error("Error al verificar la imagen:", error);
+                    }
+                }
+                setProfileImage(fotoPerfilUrl);
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(1) strong').textContent = paciente.apellido + ", " + paciente.nombre;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(3) strong').textContent = paciente.edad;
@@ -94,4 +110,23 @@ if (fotoPaciente) {
     fotoPaciente.addEventListener('mouseleave', () => {
         icon_camera.hidden = true
     })
+}
+function checkImage(imagePath) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "./check_image.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                resolve(response.exists);
+            } else {
+                reject(xhr.statusText);
+            }
+        };
+        xhr.onerror = function () {
+            reject("Error de red al intentar verificar la imagen.");
+        };
+        xhr.send(`image_path=${imagePath}`);
+    });
 }
