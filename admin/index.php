@@ -9,8 +9,8 @@ if (isset($_SESSION['swal_message'])) {
     unset($_SESSION['swal_message']);
 }
 $ir_a_pestana = '';
-if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
-    $ir_a_pestana = 'HC';
+if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
+    $ir_a_pestana = $_SESSION['pestana'];
     $_SESSION['pestana']='';
 }
 ?>

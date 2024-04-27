@@ -230,3 +230,5 @@ if (isset($sqlInsert) || isset($sqlUpdate) || isset($sqlDelete)) {
     $errorInfo = $con->errorInfo();
     echo "Error al guardar los datos: " . $errorInfo[2];
 }
+
+$con = null;

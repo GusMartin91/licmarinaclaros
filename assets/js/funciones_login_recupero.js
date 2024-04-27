@@ -18,6 +18,7 @@ let div_new_pass_re = document.getElementById('div_new_pass_re');
 let div_siguiente = document.getElementById('div_siguiente');
 let div_submit = document.getElementById('div_submit');
 let boton_cerrar_re = document.getElementById('boton_cerrar_re');
+const mensaje_confirmacion_recupero = document.getElementById('mensaje_confirmacion_recupero');
 
 modal_login_recupero.addEventListener('hidden.bs.modal', function () {
     form_login_recupero.reset()
@@ -204,4 +205,15 @@ function mostrarAlerta(mensaje) {
         title: 'Atención',
         text: mensaje
     });
+}
+function confirma_pass_re() {
+    if (recupero_new_pass.value === recupero_new_pass_re.value) {
+        recupero_new_pass_re.style.border = '2px solid green';
+        mensaje_confirmacion_recupero.innerText = 'Las contraseñas coinciden';
+        mensaje_confirmacion_recupero.style.color = 'green';
+    } else {
+        recupero_new_pass_re.style.border = '2px solid red';
+        mensaje_confirmacion_recupero.innerText = 'Las contraseñas no coinciden';
+        mensaje_confirmacion_recupero.style.color = 'red';
+    }
 }

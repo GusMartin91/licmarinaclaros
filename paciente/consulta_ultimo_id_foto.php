@@ -19,8 +19,5 @@ try {
   }
 } catch (PDOException $e) {
   echo json_encode(['success' => false, 'error' => 'Error al obtener el ID: ' . $e->getMessage()]);
-} finally {
-  if ($con !== null) {
-    $con = null;
-  }
 }
+$con = null;

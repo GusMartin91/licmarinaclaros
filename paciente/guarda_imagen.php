@@ -119,11 +119,8 @@ if (isset($_FILES['image']) && isset($_POST['dni_paciente_foto']) && isset($_POS
     } catch (PDOException $e) {
         $con->rollBack();
         echo "Error de conexión: " . $e->getMessage();
-    } finally {
-        if ($con !== null) {
-            $con = null;
-        }
     }
+    $con = null;
 } else {
     echo json_encode([
         "message" => "Invalid request."

@@ -1,7 +1,8 @@
 <?php require '../assets/template/header.php';
 $ir_a_pestana = '';
-if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
-    $ir_a_pestana = 'HC';
+if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
+    $ir_a_pestana = $_SESSION['pestana'];
+    $_SESSION['pestana'] = '';
 }
 ?>
 <input type="hidden" name="dni_paciente" id="dni_paciente" value="<?php echo $_SESSION['dni'] ?>">
@@ -110,8 +111,12 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
     </div>
     <div class="tab-pane fade" id="galeria_imagenes-tab-pane" role="tabpanel" aria-labelledby="galeria_imagenes-tab" tabindex="0">
         <div class="container mt-4">
+            <div class="row justify-content-center mb-4">
+                <div class="col text-center">
+                    <button class="btn btn-info" id="boton_subir_imagen" data-bs-toggle="modal" data-bs-target="#modalGaleria"><i class="fa-regular fa-cloud-arrow-up fa-xl"></i> <b>Subir Imagen</b></button>
+                </div>
+            </div>
             <div class="row justify-content-center gap-4" id="contenedor_galeria">
-                
             </div>
         </div>
     </div>
@@ -122,6 +127,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] == 'HC') {
 <?php
 require './modalConfirma.php';
 require './modalFoto.php';
+require './modalGaleria.php';
 require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_paciente.js"></script>
@@ -132,6 +138,10 @@ require '../assets/template/footer.php';
     if (irAPestana == 'HC') {
         setTimeout(() => {
             historial_consulta.click()
+        }, 2000);
+    } else if (irAPestana == 'gallery') {
+        setTimeout(() => {
+            galeria_imagenes.click()
         }, 2000);
     }
 </script>

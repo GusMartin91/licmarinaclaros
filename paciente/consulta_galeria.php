@@ -20,8 +20,5 @@ try {
     echo json_encode($array_HC, JSON_UNESCAPED_UNICODE);
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'error' => 'Error al obtener la galería del paciente: ' . $e->getMessage()]);
-} finally {
-    if ($con !== null) {
-        $con = null;
-    }
 }
+$con = null;

@@ -30,7 +30,8 @@
                         </div>
                         <div class="col-12 mb-2" id="div_new_pass_re" hidden>
                             <label for="new_pass_re" class="form-label">Repita nueva contraseña</label>
-                            <input type="password" name="new_pass_re" id="new_pass_re" class="form-control" required>
+                            <input type="password" onchange="confirma_pass_re()" name="new_pass_re" id="new_pass_re" class="form-control" required>
+                            <span id="mensaje_confirmacion_recupero"></span>
                         </div>
                         <div class="text-center mt-3 mb-3" id="div_siguiente">
                             <button type="button" id="submit_siguiente" class="btn btn-primary"><i class="fa-regular fa-arrow"></i> Siguiente</button>

@@ -31,8 +31,7 @@ function fichaPaciente() {
             const paciente = JSON.parse(xhr.responseText);
             if (paciente) {
                 let dni = paciente.dni
-                const fechaNacimiento = paciente.fecha_nacimiento;
-                const fechaFormateada = fechaNacimiento.split('-').reverse().join('-');
+                const fechaNacimiento = moment(paciente.fecha_nacimiento).format("DD-MM-YYYY");
                 document.getElementById('titulo_ficha').innerHTML = `Ficha personal de <strong>${paciente.apellido}, ${paciente.nombre}</strong>`
                 document.getElementById('dni_paciente_foto').value = dni;
                 const formData = new FormData();
@@ -74,7 +73,7 @@ function fichaPaciente() {
                 }
                 setProfileImage(fotoPerfilUrl);
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(1) strong').textContent = paciente.apellido + ", " + paciente.nombre;
-                pacientes_tab_pane.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;
+                pacientes_tab_pane.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaNacimiento;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(3) strong').textContent = paciente.edad;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(4) strong').textContent = paciente.desc_genero;
                 pacientes_tab_pane.querySelector('.list-group-item:nth-child(5) strong').textContent = dni;

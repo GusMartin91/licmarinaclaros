@@ -191,6 +191,7 @@ if (isset($sqlInsert) || isset($sqlUpdate) || isset($sqlDelete)) {
         ];
         header('Location: ./index.php');
     }
+    $con = null;
 } else {
     echo "Error al guardar los datos.";
 }
