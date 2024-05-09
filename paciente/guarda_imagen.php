@@ -53,16 +53,17 @@ if (isset($_FILES['image']) && isset($_POST['dni_paciente_foto']) && isset($_POS
     $fecha_cambio = date("Y-m-d");
     $fecha_cambio_hasta = strtotime('-1 day', strtotime($fecha_cambio));
     $fecha_cambio_hasta = date("Y-m-d", $fecha_cambio_hasta);
-    $uploadDirectory = '../assets/img/profiles/';
-    $randomNumber = rand(0000, 9999);
+    $uploadDirectory = "../assets/file_server/" . $usuario . "/profile/";
+    $randomNumber = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
     $fileName = $dni_paciente_foto . '_' . $randomNumber . '.jpg';
-    $foto_perfil = "img/profiles/" . $fileName;
     $uploadPath = $uploadDirectory . $fileName;
-
     try {
         $con = new PDO("mysql:host=localhost;dbname=licmarinaclaros", "nutrihot", "nutrihot915");
         $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $con->beginTransaction();
+        if (!file_exists($uploadDirectory)) {
+            mkdir($uploadDirectory, 0777, true); // Crea el directorio y establece los permisos adecuados
+        }
         if (move_uploaded_file($image['tmp_name'], $uploadPath)) {
             $query = "INSERT INTO historial_foto (dni_paciente, nombre_foto, usuario, fecha_desde) VALUES (?, ?, ?, ?)";
             $queryUpdate = "UPDATE historial_foto SET fecha_hasta = ? WHERE id_historial_foto = ?";
@@ -88,7 +89,7 @@ if (isset($_FILES['image']) && isset($_POST['dni_paciente_foto']) && isset($_POS
             $statementUpdate->bindParam(1, $fecha_cambio_hasta);
             $statementUpdate->bindParam(2, $id_historial_foto);
             $statementUpdate->execute();
-            $statementPaciente->bindParam(1, $foto_perfil);
+            $statementPaciente->bindParam(1, $fileName);
             $statementPaciente->bindParam(2, $dni_paciente_foto);
             $statementPaciente->execute();
 

@@ -55,22 +55,33 @@ $tipo_auditoria = 'Alta en Galeria';
 $aplicativo = 'Galeria';
 $ruta_aplicativo = './paciente/index.php';
 
-if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
-    // Directorio donde se guardarán las imágenes
-    $directorio = "../assets/img/gallery/";
 
-    // Obtener información del archivo de imagen
-    $nombreArchivo = $usuario . '_' . $_FILES["imagen"]["name"];
-    $rutaArchivo = $directorio . $nombreArchivo;
+$id_galeria_paciente = $_POST["id_galeria"] ?? '';
+$titulo = $_POST["titulo"] ?? '';
+$fecha_imagen = $_POST["fecha_imagen"] ?? '';
+$url_imagen = $_POST["url_imagen"] ?? '';
+$rutaArchivo = "../assets/file_server/" . $usuario . "/gallery/" . $url_imagen;
+$descripcion = $_POST["descripcion"] ?? '';
+$movimiento = $_POST["movimiento"] ?? '';
+try {
+    $con->beginTransaction();
+    switch ($movimiento) {
+        case 'A':
+            if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
+                // Directorio donde se guardarán las imágenes
+                $directorio = "../assets/file_server/" . $usuario . "/gallery/";
 
-    // Mover la imagen del directorio temporal al directorio de destino
-    if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $rutaArchivo)) {
-        $titulo = $_POST["titulo"];
-        $fecha = $_POST["fecha"];
-        $descripcion = $_POST["descripcion"];
-        $actualizacionString = "Titulo: " . $titulo . ", Fecha: " . $fecha . ", Descripcion: " . $descripcion;
-        try {
-            $con->beginTransaction();
+                $randomNumber = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+                // Obtener información del archivo de imagen
+                $nombreArchivo = $usuario . '_' . $randomNumber . '_' . $_FILES["imagen"]["name"];
+                $rutaArchivo = $directorio . $nombreArchivo;
+                if (!file_exists($directorio)) {
+                    mkdir($directorio, 0777, true); // Crea el directorio y establece los permisos adecuados
+                }
+                move_uploaded_file($_FILES["imagen"]["tmp_name"], $rutaArchivo);
+            } else {
+                echo "Debe seleccionar una imagen.";
+            }
             // Preparar la consulta SQL para insertar el registro en la base de datos
             $sqlInsert = "INSERT INTO galeria_paciente (dni_paciente, titulo, descripcion, url_imagen, fecha_imagen, usuario) VALUES (:dni_paciente, :titulo, :descripcion, :url_imagen, :fecha_imagen, :usuario)";
             $stmtInsert = $con->prepare($sqlInsert);
@@ -78,41 +89,57 @@ if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
             $stmtInsert->bindParam(":titulo", $titulo);
             $stmtInsert->bindParam(":descripcion", $descripcion);
             $stmtInsert->bindParam(":url_imagen", $nombreArchivo);
-            $stmtInsert->bindParam(":fecha_imagen", $fecha);
+            $stmtInsert->bindParam(":fecha_imagen", $fecha_imagen);
             $stmtInsert->bindParam(":usuario", $usuario);
             $stmtInsert->execute();
-
             $id_galeria_paciente = obtenerID($con);
-
-            // Preparar la consulta SQL para auditar
-            $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, aplicativo, ruta_aplicativo, ultima_actualizacion, usuario, ip_cliente, sistema_operativo, browser) VALUES (:tipo_auditoria, :id_galeria_paciente, :usuario, :aplicativo, :ruta_aplicativo, :actualizacionString, :usuario, :ip_cliente, :sistema_operativo, :navegador)";
-            $stmtAudita = $con->prepare($sqlAudita);
-            $stmtAudita->bindParam(':tipo_auditoria', $tipo_auditoria, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':id_galeria_paciente', $id_galeria_paciente, PDO::PARAM_INT);
-            $stmtAudita->bindParam(':usuario', $usuario, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':aplicativo', $aplicativo, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':ruta_aplicativo', $ruta_aplicativo, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':actualizacionString', $actualizacionString, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':ip_cliente', $ip_cliente, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':sistema_operativo', $sistema_operativo, PDO::PARAM_STR);
-            $stmtAudita->bindParam(':navegador', $navegador, PDO::PARAM_STR);
-            $stmtAudita->execute();
-
-            $con->commit();
-            echo json_encode([
-                'success' => true,
-                'message' => 'Imagen subida exitosamente',
-                'ruta_imagen' => $rutaArchivo,
-                'titulo' => $titulo,
-                'descripcion' => $descripcion
-            ]);
-        } catch (PDOException $e) {
-            $con->rollBack();
-            echo json_encode(['success' => false, 'error' => 'Error al subir la imagen y guardar en la base de datos: ' . $e->getMessage()]);
-        }
-    } else {
-        echo "Error al subir la imagen.";
+            break;
+        case 'B':
+            // Preparar la consulta SQL para borrar el registro en la base de datos
+            $sqlDelete = "DELETE FROM galeria_paciente WHERE id_galeria = :id_galeria";
+            $stmtDelete = $con->prepare($sqlDelete);
+            $stmtDelete->bindParam(":id_galeria", $id_galeria_paciente);
+            $stmtDelete->execute();
+            break;
     }
-} else {
-    echo "Debe seleccionar una imagen.";
+    $actualizacionString = "Titulo: " . $titulo . ", Fecha imagen: " . $fecha_imagen . ", URL imagen: " . $rutaArchivo . ", Descripcion: " . $descripcion;
+
+    // Preparar la consulta SQL para auditar
+    $sqlAudita = "INSERT INTO auditorias (tipo_auditoria, id_modificado, dni_modificado, aplicativo, ruta_aplicativo, ultima_actualizacion, usuario, ip_cliente, sistema_operativo, browser) VALUES (:tipo_auditoria, :id_galeria_paciente, :usuario, :aplicativo, :ruta_aplicativo, :actualizacionString, :usuario, :ip_cliente, :sistema_operativo, :navegador)";
+    $stmtAudita = $con->prepare($sqlAudita);
+    $stmtAudita->bindParam(':tipo_auditoria', $tipo_auditoria, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':id_galeria_paciente', $id_galeria_paciente, PDO::PARAM_INT);
+    $stmtAudita->bindParam(':usuario', $usuario, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':aplicativo', $aplicativo, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':ruta_aplicativo', $ruta_aplicativo, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':actualizacionString', $actualizacionString, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':ip_cliente', $ip_cliente, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':sistema_operativo', $sistema_operativo, PDO::PARAM_STR);
+    $stmtAudita->bindParam(':navegador', $navegador, PDO::PARAM_STR);
+    $stmtAudita->execute();
+
+    $con->commit();
+    if (isset($sqlInsert)) {
+        echo json_encode([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Imagen subida exitosamente',
+            'ruta_imagen' => $rutaArchivo,
+            'titulo' => $titulo,
+            'descripcion' => $descripcion
+        ]);
+    }
+    if (isset($sqlDelete)) {
+        echo json_encode([
+            'success' => true,
+            'icon' => 'error',
+            'message' => '¡La imagen ha sido borrada exitosamente!',
+            'ruta_imagen' => $rutaArchivo,
+            'titulo' => $titulo,
+            'descripcion' => $descripcion
+        ]);
+    }
+} catch (PDOException $e) {
+    $con->rollBack();
+    echo json_encode(['success' => false, 'error' => 'Error al subir la imagen y guardar en la base de datos: ' . $e->getMessage()]);
 }

@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="card-body row">
                                     <div class="col-xs-12 col-sm-4" id="fotoPaciente_admin">
-                                        <img src="../assets/img/profiles/default_profile.png" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
+                                        <img src="../assets/img/default_profile.png" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
                                     </div>
                                     <ul class="list-group col-xs-12 col-sm-8">
                                         <li class="list-group-item">Nombre completo: <strong>[Nombre completo del paciente]</strong></li>

@@ -149,6 +149,9 @@
 .imagen-perfil {
   width: 75px;
 }
+.imagen-perfil2 {
+  width: 55px;
+}
 #tabla_HC_paciente {
   width: 100%;
 }
@@ -193,6 +196,6 @@
   display: none;
 }
 
-#modal_header_galeria{
-  background-color:violet;
+#modal_header_galeria {
+  background-color: violet;
 }

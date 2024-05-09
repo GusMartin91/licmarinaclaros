@@ -1,4 +1,9 @@
 <?php require '../assets/template/header.php';
+$swal_message = [];
+if (isset($_SESSION['swal_message'])) {
+    $swal_message = $_SESSION['swal_message'];
+    unset($_SESSION['swal_message']);
+}
 $ir_a_pestana = '';
 if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
     $ir_a_pestana = $_SESSION['pestana'];
@@ -35,8 +40,8 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
                         <div class="card-body row">
                             <div class="col-xs-12 col-sm-4" id="fotoPaciente">
                                 <label for="file-upload" class="form-label textdeco">
-                                    <img src="../assets/img/profiles/default_profile.png" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
-                                    <img src="../assets/img/profiles/camera.svg" class="rounded-circle  w-100" id="icon-camera" hidden>
+                                    <img src="../assets/img/default_profile.png" class="rounded-circle  w-100" alt="Foto del paciente" id="foto-paciente">
+                                    <img src="../assets/img/camera.svg" class="rounded-circle  w-100" id="icon-camera" hidden>
                                 </label>
                                 <input type="file" id="file-upload" class="image" hidden>
                             </div>
@@ -121,6 +126,15 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
         </div>
     </div>
     <div class="tab-pane fade" id="archivos-tab-pane" role="tabpanel" aria-labelledby="archivos-tab" tabindex="0">
+        <div class="container mt-4">
+            <div class="row justify-content-center mb-4">
+                <div class="col text-center">
+                    <button class="btn btn-info" id="boton_subir_archivo" data-bs-toggle="modal" data-bs-target="#modalArchivo"><i class="fa-regular fa-cloud-arrow-up fa-xl"></i> <b>Subir Archivo</b></button>
+                </div>
+            </div>
+            <div class="row justify-content-center gap-4" id="contenedor_archivos">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -128,12 +142,16 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
 require './modalConfirma.php';
 require './modalFoto.php';
 require './modalGaleria.php';
+// require './modalArchivo.php';
 require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_paciente.js"></script>
 <script src="../assets/js/funciones_paciente_HC.js"></script>
 <script src="../assets/js/funciones_paciente_galeria.js"></script>
+<!-- <script src="../assets/js/funciones_paciente_archivos.js"></script> -->
 <script>
+    const swalMessage = <?php echo json_encode($swal_message); ?>;
+    mostrarAlertaPaciente(swalMessage);
     const irAPestana = <?php echo json_encode($ir_a_pestana); ?>;
     if (irAPestana == 'HC') {
         setTimeout(() => {

@@ -54,8 +54,8 @@ function fichaPaciente() {
                         console.error(error);
                     });
                 const fotoPerfil = paciente.foto_perfil || '';
-                const fotoPerfilUrl = "../assets/" + fotoPerfil;
-                const defaultImageUrl = "../assets/img/profiles/default_profile.png";
+                const fotoPerfilUrl = `../assets/file_server/${paciente.dni}/profile/${fotoPerfil}`;
+                const defaultImageUrl = `../assets/img/default_profile.png`;
 
                 async function setProfileImage(fotoPerfilUrl) {
                     try {
@@ -128,4 +128,14 @@ function checkImage(imagePath) {
         };
         xhr.send(`image_path=${imagePath}`);
     });
+}
+function mostrarAlertaPaciente(swalMessage) {
+    if (swalMessage != '') {
+        Swal.fire({
+            icon: swalMessage.icon,
+            title: swalMessage.title,
+            text: swalMessage.text,
+            confirmButtonText: swalMessage.confirmButtonText
+        });
+    }
 }

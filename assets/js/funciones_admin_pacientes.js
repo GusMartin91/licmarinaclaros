@@ -66,26 +66,27 @@ function tabla_pacientes() {
                         movimiento: response[i].movimiento || '',
                     }
                     let fotoPerfilSrc = '';
-                    if (datosBoton.foto_perfil !== '') {
+                    if (datosBoton.foto_perfil !== 'default_profile.png') {
+                        let image_path = `../assets/file_server/${datosBoton.dni}/profile/${datosBoton.foto_perfil}`
                         $.ajax({
                             url: './check_image.php',
                             type: 'POST',
-                            data: { image_path: datosBoton.foto_perfil },
+                            data: { image_path },
                             async: false,
                             success: function (response) {
                                 if (response.exists) {
-                                    fotoPerfilSrc = '../assets/' + datosBoton.foto_perfil;
+                                    fotoPerfilSrc = `../assets/file_server/${datosBoton.dni}/profile/${datosBoton.foto_perfil}`;
                                 } else {
-                                    fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                                    fotoPerfilSrc = '../assets/img/default_profile.png';
                                 }
                             },
                             error: function (xhr, status, error) {
                                 console.error(error);
-                                fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                                fotoPerfilSrc = '../assets/img/default_profile.png';
                             }
                         });
                     } else {
-                        fotoPerfilSrc = '../assets/img/profiles/default_profile.png';
+                        fotoPerfilSrc = '../assets/img/default_profile.png';
                     }
                     let fila = '<tr>' +
                         '<td><img src="' + fotoPerfilSrc + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil"></td>' +
@@ -210,7 +211,7 @@ function tabla_pacientes() {
                             render: DataTable.render.datetime('DD/MM/YYYY'),
                         },
                         {
-                            width: "11%",
+                            width: "13%",
                             targets: (7)
                         }],
                 });
@@ -280,7 +281,12 @@ function botonFicha() {
         const fechaFormateada = fechaNacimiento.split('-').reverse().join('-');
 
         modal_ficha_pacienteLabel.innerHTML = `Ficha personal de <strong>${datos.apellido}, ${datos.nombre}</strong>`
-        document.getElementById('foto-paciente').src = "../assets/" + datos.foto_perfil;
+        if (datos.foto_perfil == "default_profile.png") {
+            document.getElementById('foto-paciente').src = "../assets/img/default_profile.png";
+        } else {
+            document.getElementById('foto-paciente').src = `../assets/file_server/${datos.dni}/profile/${datos.foto_perfil}`;
+
+        }
         modal_ficha_paciente.querySelector('#fotoPaciente_admin img').alt = `Foto de ${datos.apellido}, ${datos.nombre}`;
         modal_ficha_paciente.querySelector('.list-group-item:nth-child(1) strong').textContent = datos.apellido + ", " + datos.nombre;
         modal_ficha_paciente.querySelector('.list-group-item:nth-child(2) strong').textContent = fechaFormateada;

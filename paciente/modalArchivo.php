@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalGaleria" tabindex="-1" aria-labelledby="modalGaleriaLabel" aria-hidden="true">
+<div class="modal fade" id="modalArchivo" tabindex="-1" aria-labelledby="modalArchivoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" id="modal_header_galeria">
-                <h5 class="modal-title" id="modalGaleriaLabel"><b>Subir Imagen</b></h5>
+            <div class="modal-header" id="modal_header_archivo">
+                <h5 class="modal-title" id="modalArchivoLabel"><b>Subir Imagen</b></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -33,7 +33,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnSubirImagen">Subir imagen</button>
-                <button type="button" class="btn btn-secondary" id="galeria_imagenes_cerrar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" id="Archivo_imagenes_cerrar" data-bs-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
