@@ -10,20 +10,20 @@
                     <div class="row">
                         <div class="col-md-7">
                             <div class="mb-3">
-                                <label for="titulo" class="form-label"><b>Título:</b></label>
-                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingrese el título" required>
+                                <label for="titulo_galeria" class="form-label"><b>Título:</b></label>
+                                <input type="text" class="form-control" id="titulo_galeria" name="titulo_galeria" placeholder="Ingrese el título" required>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="mb-3">
-                                <label for="fecha_imagen" class="form-label"><b>Fecha:</b></label>
-                                <input type="date" class="form-control" id="fecha_imagen" name="fecha_imagen" required>
+                                <label for="fecha_imagen_galeria" class="form-label"><b>Fecha:</b></label>
+                                <input type="date" class="form-control" id="fecha_imagen_galeria" name="fecha_imagen_galeria" required>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label"><b>Descripción:</b></label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Ingrese una descripción" required></textarea>
+                        <label for="descripcion_galeria" class="form-label"><b>Descripción:</b></label>
+                        <textarea class="form-control" id="descripcion_galeria" name="descripcion_galeria" rows="3" placeholder="Ingrese una descripción" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="imagen" class="form-label"><b>Seleccionar imagen:</b></label>

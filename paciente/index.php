@@ -24,7 +24,7 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
         <button class="nav-link" id="galeria_imagenes-tab" onclick="galeria_paciente()" data-bs-toggle="tab" data-bs-target="#galeria_imagenes-tab-pane" type="button" role="tab" aria-controls="galeria_imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="archivos-tab" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
+        <button class="nav-link" id="archivos-tab" onclick="archivos_paciente()" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -142,13 +142,13 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
 require './modalConfirma.php';
 require './modalFoto.php';
 require './modalGaleria.php';
-// require './modalArchivo.php';
+require './modalArchivo.php';
 require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_paciente.js"></script>
 <script src="../assets/js/funciones_paciente_HC.js"></script>
 <script src="../assets/js/funciones_paciente_galeria.js"></script>
-<!-- <script src="../assets/js/funciones_paciente_archivos.js"></script> -->
+<script src="../assets/js/funciones_paciente_archivos.js"></script>
 <script>
     const swalMessage = <?php echo json_encode($swal_message); ?>;
     mostrarAlertaPaciente(swalMessage);

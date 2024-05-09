@@ -29,7 +29,7 @@ function tabla_HC_paciente() {
                             '<td>' + datosBoton.fecha_consulta + '</td>' +
                             '<td>' + datosBoton.peso + '</td>' +
                             '<td>' + datosBoton.observaciones_nutri + '</td>' +
-                            '<td>' + datosBoton.observaciones_paciente +
+                            '<td class="' + (datosBoton.observaciones_paciente ? 'd-flex justify-content-between' : 'text-end') + '">' + datosBoton.observaciones_paciente +
                             ` <button title="Editar" onclick="botonEditar_observaciones(event)" class="btn btn-sm btn-warning" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +
                             '</td>' +
                             '</tr>';

@@ -1,13 +1,13 @@
-const contenedor_archivo = document.getElementById('contenedor_archivo')
+const contenedor_archivos = document.getElementById('contenedor_archivos')
 const boton_subir_archivo = document.getElementById('boton_subir_archivo')
 const formularioSubirArchivo = document.getElementById('formularioSubirArchivo');
 const modalArchivo = document.getElementById('modalArchivo');
-// // const input_titulo = document.getElementById('titulo');
-// const input_descripcion = document.getElementById('descripcion');
-// const input_fecha_archivo = document.getElementById('fecha_archivo');
-// const input_archivo = document.getElementById('archivo');
-// const archivo = document.getElementById('archivo-tab');
-// const archivo_cerrar = document.getElementById('archivo_cerrar');
+const input_titulo_archivo = document.getElementById('titulo_archivo');
+const input_descripcion_archivo = document.getElementById('descripcion_archivo');
+const input_fecha_archivo = document.getElementById('fecha_archivo');
+const input_archivo = document.getElementById('archivo');
+const archivos = document.getElementById('archivos-tab');
+const archivo_cerrar = document.getElementById('archivo_cerrar');
 
 function archivos_paciente() {
     const xhr = new XMLHttpRequest();
@@ -18,9 +18,8 @@ function archivos_paciente() {
             const response = JSON.parse(xhr.responseText);
             if (response) {
                 response.sort((a, b) => new Date(b.fecha_archivo) - new Date(a.fecha_archivo));
-                contenedor_archivo.innerHTML = '';
+                contenedor_archivos.innerHTML = '';
                 for (let i = 0; i < response.length; i++) {
-                    var fechaFormateada = moment(response[i].fecha_archivo).format("DD-MM-YYYY");
                     let datosBoton = {
                         titulo: response[i].titulo || '',
                         id_archivo: response[i].id_archivo || '',
@@ -29,22 +28,53 @@ function archivos_paciente() {
                         url_archivo: response[i].url_archivo || '',
                         fecha_archivo: response[i].fecha_archivo || '',
                     }
-                    contenedor_archivo.innerHTML += `
-                    <div class="card col-sm-12 col-md-5 mb-2">
+                    let fechaFormateada = moment(datosBoton.fecha_archivo).format("DD-MM-YYYY");
+                    let extension = datosBoton.url_archivo.split('.').pop().toLowerCase();
+                    // Definir el icono según la extensión del archivo
+                    let icono = '';
+                    switch (extension) {
+                        case 'pdf':
+                            icono = '<i class="fa-solid fa-file-pdf fa-2xl mt-4 mb-4" style="color:red;"></i>';
+                            break;
+                        case 'doc':
+                        case 'docx':
+                            icono = '<i class="fa-solid fa-file-word fa-2xl mt-4 mb-4" style="color:blue;"></i>';
+                            break;
+                        case 'xls':
+                        case 'xlsx':
+                            icono = '<i class="fa-solid fa-file-excel fa-2xl mt-4 mb-4" style="color:green;"></i>';
+                            break;
+                        case 'txt':
+                            icono = '<i class="fa-solid fa-file-alt fa-2xl mt-4 mb-4" style="color:black;"></i>';
+                            break;
+                        case 'ppt':
+                        case 'pptx':
+                            icono = '<i class="fa-solid fa-file-powerpoint fa-2xl mt-4 mb-4" style="color:orange;"></i>';
+                            break;
+                        case 'jpg':
+                        case 'jpeg':
+                        case 'png':
+                            icono = '<i class="fa-solid fa-file-image fa-2xl mt-4 mb-4" style="color:purple;"></i>';
+                            break;
+                        case 'zip':
+                        case 'rar':
+                            icono = '<i class="fa-solid fa-file-archive fa-2xl mt-4 mb-4" style="color:brown;"></i>';
+                            break;
+                        default:
+                            icono = '<i class="fa-solid fa-file fa-2xl mt-4 mb-4" style="color:gray;"></i>'; // Icono genérico para otras extensiones
+                    }
+                    contenedor_archivos.innerHTML += `
+                    <div class="card col-sm-12 col-md-3 mb-2 p-4">
                         <div class="row no-gutters">
-                            <div class="col-sm-12 col-md-6 p-0">
-                                <a href="../assets/file_server/${response[i].dni_paciente}/files/${response[i].url_archivo}" target="_blank">
-                                    ${response[i].url_archivo}
+                            <div class="col-sm-12 col-md-6 p-0 card-body text-center">
+                                <h5 class="card-title">${fechaFormateada}</h5>
+                                <h5 class="card-title">${datosBoton.url_archivo}</h5>
+                                <a href="../assets/file_server/${datosBoton.dni_paciente}/files/${datosBoton.url_archivo}" target="_blank">
+                                    ${icono}
                                 </a>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">${fechaFormateada}</h5>
-                                    <h5 class="card-title">${response[i].titulo}</h5>
-                                    <p class="card-text">${response[i].descripcion}</p>
-                                    <p class="card-text"><button title="Eliminar" class="btn btn-lg" data-bs-datos='${JSON.stringify(datosBoton)}' onclick="gestionarEliminar_archivo(event)"'><i class="fa-solid fa-trash" style="color:red;"></i></button></p>
-                                </div>
-                            </div>
+                                <h5 class="card-title">${datosBoton.titulo}</h5>
+                                <p class="card-text">${datosBoton.descripcion}</p>
+                                <p class="card-text"><button title="Eliminar" class="btn btn-lg" data-bs-datos='${JSON.stringify(datosBoton)}' onclick="gestionarEliminar_archivo(event)"'><i class="fa-solid fa-trash" style="color:red;"></i></button></p>
                         </div>
                     </div>
                     `
@@ -59,8 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Maneja el clic en el botón "Subir archivo"
     document.getElementById("btnSubirArchivo").addEventListener("click", function () {
         // Obtén los datos del formulario
-        let titulo = input_titulo.value;
-        let descripcion = input_descripcion.value;
+        let titulo = input_titulo_archivo.value;
+        let descripcion = input_descripcion_archivo.value;
         let fecha_archivo = input_fecha_archivo.value;
         let archivo = input_archivo.files[0];
         let movimiento = "A";
@@ -93,8 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            archivo.click()
                             archivo_cerrar.click()
+                            archivos.click()
                         }
                     });
                 } else {
@@ -102,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Swal.fire({
                         icon: data.icon,
                         title: 'Error',
-                        text: 'Error al subir la archivo: ' + data.error,
+                        text: 'Error al subir el archivo: ' + data.error,
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -136,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 modalArchivo.addEventListener('shown.bs.modal', function () {
-    input_titulo.focus()
+    input_titulo_archivo.focus()
 });
 modalArchivo.addEventListener('hidden.bs.modal', function () {
     formularioSubirArchivo.reset()
@@ -149,7 +179,7 @@ function gestionarEliminar_archivo(event) {
     // Mostrar SweetAlert para confirmar la eliminación
     Swal.fire({
         title: '¡Atención!',
-        text: '¿Desea eliminar definitivamente la archivo?',
+        text: '¿Desea eliminar definitivamente el archivo?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -185,8 +215,8 @@ function gestionarEliminar_archivo(event) {
                             confirmButtonText: 'Aceptar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                archivo.click()
                                 archivo_cerrar.click()
+                                archivos.click()
                             }
                         });
                     } else {
@@ -194,7 +224,7 @@ function gestionarEliminar_archivo(event) {
                         Swal.fire({
                             icon: data.icon,
                             title: 'Error',
-                            text: 'Error al subir la archivo: ' + data.error,
+                            text: 'Error al subir el archivo: ' + data.error,
                             confirmButtonText: 'Aceptar'
                         }).then((result) => {
                             if (result.isConfirmed) {

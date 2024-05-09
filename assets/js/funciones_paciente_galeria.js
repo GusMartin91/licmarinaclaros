@@ -2,9 +2,9 @@ const contenedor_galeria = document.getElementById('contenedor_galeria')
 const boton_subir_imagen = document.getElementById('boton_subir_imagen')
 const formularioSubirImagen = document.getElementById('formularioSubirImagen');
 const modalGaleria = document.getElementById('modalGaleria');
-const input_titulo = document.getElementById('titulo');
-const input_descripcion = document.getElementById('descripcion');
-const input_fecha_imagen = document.getElementById('fecha_imagen');
+const input_titulo = document.getElementById('titulo_galeria');
+const input_descripcion = document.getElementById('descripcion_galeria');
+const input_fecha_imagen = document.getElementById('fecha_imagen_galeria');
 const input_imagen = document.getElementById('imagen');
 const galeria_imagenes = document.getElementById('galeria_imagenes-tab');
 const galeria_imagenes_cerrar = document.getElementById('galeria_imagenes_cerrar');
@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            galeria_imagenes.click()
                             galeria_imagenes_cerrar.click()
+                            galeria_imagenes.click()
                         }
                     });
                 } else {
