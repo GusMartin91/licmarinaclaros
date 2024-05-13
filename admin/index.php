@@ -11,7 +11,7 @@ if (isset($_SESSION['swal_message'])) {
 $ir_a_pestana = '';
 if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
     $ir_a_pestana = $_SESSION['pestana'];
-    $_SESSION['pestana']='';
+    $_SESSION['pestana'] = '';
 }
 ?>
 <title>Panel de Admin</title>
@@ -24,10 +24,10 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
         <button class="nav-link" id="historial_consulta-tab" onclick="tabla_HC()" data-bs-toggle="tab" data-bs-target="#historial_consulta-tab-pane" type="button" role="tab" aria-controls="historial_consulta-tab-pane" aria-selected="false">Historial de consultas</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="galeria-imagenes-tab" data-bs-toggle="tab" data-bs-target="#galeria-imagenes-tab-pane" type="button" role="tab" aria-controls="galeria-imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
+        <button class="nav-link" id="galeria-imagenes-tab" onclick="galeria_admin()" data-bs-toggle="tab" data-bs-target="#galeria-imagenes-tab-pane" type="button" role="tab" aria-controls="galeria-imagenes-tab-pane" aria-selected="false">Galeria de imagenes</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="archivos-tab" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
+        <button class="nav-link" id="archivos-tab" onclick="archivos_admin()" data-bs-toggle="tab" data-bs-target="#archivos-tab-pane" type="button" role="tab" aria-controls="archivos-tab-pane" aria-selected="false">Archivos</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -79,10 +79,30 @@ if (isset($_SESSION['pestana']) && $_SESSION['pestana'] != '') {
         </div>
     </div>
     <div class="tab-pane fade" id="galeria-imagenes-tab-pane" role="tabpanel" aria-labelledby="galeria-imagenes-tab" tabindex="0">
-
+        <div class="container mt-4">
+            <div class="row justify-content-center mb-4">
+                <div class="col text-center">
+                    <label for="dni_paciente_galeria" style="font-size: 1.2em;">Ingrese el <b>DNI</b> del paciente:</label><br>
+                    <input class="text-center" type="text" id="dni_paciente_galeria" name="dni_paciente_galeria" style="border: 3px solid blue;position: relative;top: 3px;">
+                    <button class="btn btn-success" id="boton_buscar_galeria" onclick="buscar_galeria()">¡Buscar galería!</button>
+                </div>
+            </div>
+            <div class="row justify-content-center gap-4" id="contenedor_galeria">
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="archivos-tab-pane" role="tabpanel" aria-labelledby="archivos-tab" tabindex="0">
-
+        <div class="container mt-4">
+            <div class="row justify-content-center mb-4">
+                <div class="col text-center">
+                    <label for="dni_paciente_archivos" style="font-size: 1.2em;">Ingrese el <b>DNI</b> del paciente:</label><br>
+                    <input class="text-center" type="text" id="dni_paciente_archivos" name="dni_paciente_archivos" style="border: 3px solid blue;position: relative;top: 3px;">
+                    <button class="btn btn-success" id="boton_buscar_archivos" onclick="buscar_archivos()">¡Buscar archivos!</button>
+                </div>
+            </div>
+            <div class="row justify-content-center gap-4" id="contenedor_archivos">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -94,6 +114,8 @@ require '../assets/template/footer.php';
 ?>
 <script src="../assets/js/funciones_admin_pacientes.js"></script>
 <script src="../assets/js/funciones_admin_HC.js"></script>
+<script src="../assets/js/funciones_admin_galeria.js"></script>
+<script src="../assets/js/funciones_admin_archivos.js"></script>
 <script>
     const swalMessage = <?php echo json_encode($swal_message); ?>;
     mostrarAlertaRegistro(swalMessage);
