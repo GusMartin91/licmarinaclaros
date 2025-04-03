@@ -19,7 +19,7 @@ function tabla_HC() {
                         dni_paciente: response[i].dni_paciente || '',
                         nombre: response[i].nombre || '',
                         apellido: response[i].apellido || '',
-                        foto_perfil: response[i].foto_perfil || '',
+                        nombre_foto: response[i].nombre_foto || '',
                         peso: response[i].peso || '',
                         fecha_consulta: response[i].fecha_consulta || '',
                         observaciones_nutri: response[i].observaciones_nutri || '',
@@ -28,9 +28,9 @@ function tabla_HC() {
                     let fila = '<tr>' +
                         '<td>' + datosBoton.id_consulta + '</td>' +
                         '<td>' + datosBoton.fecha_consulta + '</td>' +
-                        (datosBoton.foto_perfil !== 'default_profile.png' ?
-                            '<td><img src="../assets/file_server/' + datosBoton.dni_paciente + '/profile/' + datosBoton.foto_perfil + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil2"> ' + datosBoton.dni_paciente + '</td>' :
-                            '<td>' + datosBoton.dni_paciente + '</td>') + 
+                        (datosBoton.nombre_foto !== 'default_profile.png' ?
+                            '<td><img src="../assets/file_server/' + datosBoton.dni_paciente + '/profile/' + datosBoton.nombre_foto + '" alt="Foto de perfil de ' + datosBoton.apellido + ', ' + datosBoton.nombre + '" class="imagen-perfil2"> ' + datosBoton.dni_paciente + '</td>' :
+                            '<td>' + datosBoton.dni_paciente + '</td>') +
                         '<td>' + datosBoton.apellido + ', ' + datosBoton.nombre + '</td>' +
                         '<td>' +
                         `<button title="Editar" onclick="botonEditar_HC()" class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modal_HC" data-bs-datos='${JSON.stringify(datosBoton)}'><i class="fa-solid fa-pen-to-square"></i></button>` +

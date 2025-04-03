@@ -70,7 +70,7 @@ if (isset($_GET['event_start_time']) && isset($_GET['invitee_email'])) {
   </section>
 </div>
 
-<a href="" id="nav_item" title="Agendar consulta." class="consulta-btn btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/licmarinaclaros/30min?hide_gdpr_banner=1'});return false;">
+<a href="" id="nav_item" title="Agendar consulta." class="consulta-btn btn">
   <i class="fa-regular fa-calendar-check fa-lg"></i><span class="text ms-2">Reservar cita.</span>
 </a>
 
